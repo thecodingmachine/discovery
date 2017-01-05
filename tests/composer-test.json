@@ -1,0 +1,21 @@
+{
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "fixtures/copy"
+    },
+    {
+      "type": "path",
+      "url": "fixtures/package_a"
+    },
+    {
+      "type": "path",
+      "url": "fixtures/package_b"
+    }
+  ],
+  "require": {
+    "thecodingmachine/discovery": "*",
+    "package/b": "*"
+  }
+}

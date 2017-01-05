@@ -1,0 +1,6 @@
+{
+    "name": "package/b",
+    "require": {
+        "package/a": "*"
+    }
+}

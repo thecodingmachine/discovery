@@ -1,0 +1,5 @@
+/vendor/
+/composer.lock
+tests/.discovery
+tests/vendor
+tests/composer-test.lock
