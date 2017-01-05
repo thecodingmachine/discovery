@@ -1,6 +1,14 @@
 Discovery
 =========
 
+[![Latest Stable Version](https://poser.pugx.org/thecodingmachine/discovery/v/stable)](https://packagist.org/packages/thecodingmachine/discovery)
+[![Total Downloads](https://poser.pugx.org/thecodingmachine/discovery/downloads)](https://packagist.org/packages/thecodingmachine/discovery)
+[![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/discovery/v/unstable)](https://packagist.org/packages/thecodingmachine/discovery)
+[![License](https://poser.pugx.org/thecodingmachine/discovery/license)](https://packagist.org/packages/thecodingmachine/discovery)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/discovery/badges/quality-score.png?b=8.0)](https://scrutinizer-ci.com/g/thecodingmachine/discovery/?branch=8.0)
+[![Build Status](https://travis-ci.org/thecodingmachine/discovery.svg?branch=8.0)](https://travis-ci.org/thecodingmachine/discovery)
+
+
 Publish and discover assets in your PHP projects
 
 This package helps you find "static" assets in your Composer packages.
