@@ -17,7 +17,7 @@ class Discovery
      */
     private function __construct()
     {
-        $this->data = file_get_contents(__DIR__.'/discovery_data.php');
+        $this->data = require __DIR__.'/discovery_data.php';
     }
 
     public static function getInstance()

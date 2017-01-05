@@ -5,17 +5,14 @@ use TheCodingMachine\Discovery\Discovery;
 
 $result = Discovery::getInstance()->get('test-asset');
 
-assert($result === [
-        'test-asset' =>
-            [
-                0 => 'a1',
-                1 => 'a2',
-                2 => 'b',
-            ],
-    ]);
+if ($result !== [ 'a1', 'a2', 'b' ]) {
+    throw new \Exception('Failed asserting returned assets. Returned: '.var_export($result, true));
+}
 
 $result = Discovery::getInstance()->get('no-exist');
 
-assert($result === []);
+if ($result !== []) {
+    throw new \Exception('Failed asserting that non existent asset type returns empty array.');
+}
 
 echo "Tests passed successfully\n";
