@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace TheCodingMachine\Discovery\Utils;
 
 /**
@@ -17,7 +19,7 @@ class FileSystem
      *
      * @throws IOException On any directory creation failure
      */
-    public function mkdir($dir, $mode = 0777)
+    public function mkdir(string $dir, $mode = 0777)
     {
         if (is_dir($dir)) {
             return;
@@ -43,7 +45,7 @@ class FileSystem
      *
      * @throws IOException If the file cannot be written to.
      */
-    public function dumpFile($filename, $content)
+    public function dumpFile(string $filename, string $content)
     {
         $dir = dirname($filename);
 
@@ -75,7 +77,7 @@ class FileSystem
      * @throws IOException When target file or directory already exists
      * @throws IOException When origin cannot be renamed
      */
-    public function rename($origin, $target, $overwrite = false)
+    public function rename(string $origin, string $target, bool $overwrite = false)
     {
         // we check that target does not exist
         if (!$overwrite && $this->isReadable($target)) {
@@ -96,7 +98,7 @@ class FileSystem
      *
      * @throws IOException When windows path is longer than 258 characters
      */
-    private function isReadable($filename)
+    private function isReadable(string $filename)
     {
         if ('\\' === DIRECTORY_SEPARATOR && strlen($filename) > 258) {
             throw new IOException('Could not check if file is readable because path length exceeds 258 characters.', 0, null, $filename);
@@ -114,7 +116,7 @@ class FileSystem
      *
      * @return string The new temporary filename (with path), or throw an exception on failure
      */
-    public function tempnam($dir, $prefix)
+    public function tempnam(string $dir, string $prefix) : string
     {
         list($scheme, $hierarchy) = $this->getSchemeAndHierarchy($dir);
         // If no scheme or scheme is "file" or "gs" (Google Cloud) create temp file in local filesystem
@@ -154,7 +156,7 @@ class FileSystem
      *
      * @return array The filename scheme and hierarchical part
      */
-    private function getSchemeAndHierarchy($filename)
+    private function getSchemeAndHierarchy(string $filename) : array
     {
         $components = explode('://', $filename, 2);
         return 2 === count($components) ? array($components[0], $components[1]) : array(null, $components[0]);

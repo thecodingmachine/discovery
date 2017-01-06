@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace TheCodingMachine\Discovery;
 
 use Composer\Package\PackageInterface;
@@ -17,7 +19,7 @@ class PackagesOrderer {
      * @param PackageInterface[] $unorderedPackagesList
      * @return array|PackageInterface[]
      */
-	public static function reorderPackages(array $unorderedPackagesList) {
+	public static function reorderPackages(array $unorderedPackagesList) : array {
 		// The very first step is to reorder the packages alphabetically.
 		// This is to ensure the same order every time, even between packages that are unrelated.
 		usort($unorderedPackagesList, function(PackageInterface $packageA, PackageInterface $packageB) {
@@ -42,7 +44,7 @@ class PackagesOrderer {
 	 * @param PackageInterface[] $availablePackages The list of all packages not yet sorted
 	 * @return PackageInterface[]
 	 */
-	private static function walkPackagesList(PackageInterface $package, array $orderedPackagesList, array &$availablePackages) {
+	private static function walkPackagesList(PackageInterface $package, array $orderedPackagesList, array &$availablePackages) : array {
 		// First, let's check that the package we want to add is not already in our list.
 		foreach ($orderedPackagesList as $includedPackage) {
 			if ($includedPackage->equals($package)) {
