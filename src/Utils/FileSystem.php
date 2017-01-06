@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+
+declare (strict_types = 1);
 
 namespace TheCodingMachine\Discovery\Utils;
 
@@ -14,7 +15,7 @@ class FileSystem
     /**
      * Creates a directory recursively.
      *
-     * @param string $dir The directory path
+     * @param string $dir  The directory path
      * @param int    $mode The directory mode
      *
      * @throws IOException On any directory creation failure
@@ -127,6 +128,7 @@ class FileSystem
                 if (null !== $scheme && 'gs' !== $scheme) {
                     return $scheme.'://'.$tmpFile;
                 }
+
                 return $tmpFile;
             }
             throw new IOException('A temporary file could not be created.');
@@ -144,6 +146,7 @@ class FileSystem
             }
             // Close the file if it was successfully opened
             @fclose($handle);
+
             return $tmpFile;
         }
         throw new IOException('A temporary file could not be created.');
@@ -159,6 +162,7 @@ class FileSystem
     private function getSchemeAndHierarchy(string $filename) : array
     {
         $components = explode('://', $filename, 2);
+
         return 2 === count($components) ? array($components[0], $components[1]) : array(null, $components[0]);
     }
 }

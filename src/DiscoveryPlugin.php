@@ -1,15 +1,14 @@
 <?php
-declare(strict_types=1);
+
+declare (strict_types = 1);
 
 namespace TheCodingMachine\Discovery;
-
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Plugin\PluginInterface;
-use Composer\Repository\InstalledFilesystemRepository;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Seld\JsonLint\JsonParser;
@@ -26,9 +25,9 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
     protected $io;
 
     /**
-     * Apply plugin modifications to Composer
+     * Apply plugin modifications to Composer.
      *
-     * @param Composer $composer
+     * @param Composer    $composer
      * @param IOInterface $io
      */
     public function activate(Composer $composer, IOInterface $io)
@@ -40,7 +39,7 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ScriptEvents::PRE_AUTOLOAD_DUMP => 'beforeDumpAutoload'
+            ScriptEvents::PRE_AUTOLOAD_DUMP => 'beforeDumpAutoload',
         ];
     }
 
@@ -54,7 +53,6 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
         $discoveryPackages = $this->getDiscoveryPackages();
         $finalArray = $this->buildFinalArray($discoveryPackages);
 
-        
         $fileSystem = new FileSystem();
         $fileSystem->dumpFile('.discovery/discovery_data.php', '<?php
 return '.var_export($finalArray, true).";\n");
@@ -79,7 +77,7 @@ return '.var_export($finalArray, true).";\n");
 
         $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
 
-        return array_filter($orderedPackageList, function(PackageInterface $package) {
+        return array_filter($orderedPackageList, function (PackageInterface $package) {
             $installationManager = $this->composer->getInstallationManager();
 
             $packageInstallPath = $installationManager->getInstallPath($package);
@@ -92,7 +90,9 @@ return '.var_export($finalArray, true).";\n");
      * Returns the parsed JSON of the discovery.json file of a package.
      *
      * @param PackageInterface $package
+     *
      * @return array
+     *
      * @throws \TheCodingMachine\Discovery\Utils\JsonException
      */
     private function getDiscoveryJson(PackageInterface $package) : array
@@ -120,6 +120,7 @@ return '.var_export($finalArray, true).";\n");
      * Builds the array that will be exported in the generated TheCodingMachine\Discovery class.
      *
      * @param PackageInterface[] $discoveryPackages
+     *
      * @return array
      */
     private function buildFinalArray(array $discoveryPackages) : array
@@ -132,7 +133,7 @@ return '.var_export($finalArray, true).";\n");
             foreach ($json as $key => $values) {
                 $existingValues = $array[$key] ?? [];
                 if (!is_array($values)) {
-                    $values = [ $values ];
+                    $values = [$values];
                 }
                 $existingValues = array_merge($existingValues, $values);
                 $array[$key] = $existingValues;
