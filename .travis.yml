@@ -10,7 +10,7 @@ before_script:
 
 script:
  - cd tests; ./run.sh
- - vendor/bin/phpunit
+ - cd ..; vendor/bin/phpunit
 
 after_script:
  - php vendor/bin/coveralls -v
