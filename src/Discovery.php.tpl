@@ -10,14 +10,16 @@ class Discovery implements DiscoveryInterface
 {
     private static $instance;
 
-    private $data;
+    private $values;
+    private $assetTypes;
 
     /**
      * Singleton. Noone creates this object directly.
      */
     private function __construct()
     {
-        $this->data = require __DIR__.'/discovery_data.php';
+        $this->values = require __DIR__.'/discovery_values.php';
+        $this->assets = require __DIR__.'/discovery_asset_types.php';
     }
 
     /**
@@ -25,7 +27,7 @@ class Discovery implements DiscoveryInterface
      *
      * @return self
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (!self::$instance) {
             self::$instance = new self();
@@ -39,10 +41,10 @@ class Discovery implements DiscoveryInterface
      * If no assets are found, an empty array is returned.
      *
      * @param string $assetType
-     * @return array
+     * @return string[]
      */
     public function get(string $assetType) : array
     {
-        return $this->data[$assetType] ?? [];
+        return $this->values[$assetType] ?? [];
     }
 }

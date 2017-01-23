@@ -56,6 +56,8 @@ $assets = TheCodingMachine\Discovery::getInstance()->get('some_asset_type');
 // This will scan all discovery.json files and returns an array of values.
 ```
 
+Each individual value MUST be a string.
+
 Install
 -------
 
@@ -89,12 +91,84 @@ They are excellent, thanks for asking! All data stored in `discovery.json` files
 
 If you are wondering, by default, the data is stored in the `.discovery` directory, at the root of your project. You can put the directory in your `.gitignore` if your want as the directory will be automatically regenerated on every `composer install`.
 
+
+Passing additional meta-data
+----------------------------
+
+Stored values are strings. Yet, if you need to pass more complex objects, you can add metadata to your value using the `meta` key.
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "meta": {
+                "some": "metadata",
+                "more": "metadata"
+            }
+        }
+    ]
+}
+```
+
+Notice in this example that the value passed is no longer a string, it is an object containing the `value` key (that contains the actual value) and the `meta` key (that contains the metadata).
+
+Metadata can be queried using the `getAssets()` method that will return complete `Asset` objects:
+
+```php
+$assets = TheCodingMachine\Discovery::getInstance()->getAssets('some_asset_type');
+
+foreach ($assets as $asset) {
+    $value = $asset->getValue();
+    $meta = $asset->getMetadata();
+    $package = $asset->getPackage(); // The name of the composer package this asset comes from
+    $priority = $asset->getPriority(); // The priority (if configured, see below)
+}
+```
+
+Removing an asset added by another package
+------------------------------------------
+
+A package "B" can remove the assets added by another package "A" (assuming that package "B" requires "A").
+
+To do so, use the `action` key:
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "action": "remove"
+        }
+    ]
+}
+```
+
+This will remove "some_value" from the asset type "some_asset_type".
+
 What is the order for the assets?
 ---------------------------------
 
-Assets are returned in an order respecting the dependencies between packages.
+By default, assets are returned in an order respecting the dependencies between packages.
 
 So if package B depends on package A, then assets of package A will be returned before assets of package B.
+
+You can however alter this order using the `priority` modifier.
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "priority": 99
+        }
+    ]
+}
+```
+
+The default priority is 0.
+Values with higher priorities will come first in the array.
+Values with the same priority are ordered by package dependency order.
 
 Other projects providing discovery features
 -------------------------------------------

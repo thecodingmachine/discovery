@@ -4,5 +4,13 @@ php:
  - 7.0
  - 7.1
 
+before_script:
+ - wget http://getcomposer.org/composer.phar
+ - php composer.phar install --no-interaction
+
 script:
+ - vendor/bin/phpunit
  - cd tests; ./run.sh
+
+after_script:
+ - php vendor/bin/coveralls -v

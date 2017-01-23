@@ -3,3 +3,4 @@
 tests/.discovery
 tests/vendor
 tests/composer-test.lock
+build/

@@ -43,6 +43,15 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
         ];
     }
 
+    /**
+     * @return AssetsBuilder
+     */
+    private function getAssetsBuilder() : AssetsBuilder
+    {
+        $installationManager = $this->composer->getInstallationManager();
+        return new AssetsBuilder($installationManager, $this->io);
+    }
+
     public function beforeDumpAutoload(Event $event)
     {
         // Plugin has been uninstalled
@@ -50,12 +59,26 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
             return;
         }
 
-        $discoveryPackages = $this->getDiscoveryPackages();
-        $finalArray = $this->buildFinalArray($discoveryPackages);
-
         $fileSystem = new FileSystem();
-        $fileSystem->dumpFile('.discovery/discovery_data.php', '<?php
-return '.var_export($finalArray, true).";\n");
+
+        $discoveryPackages = $this->getDiscoveryPackages();
+        $assetTypes = $this->getAssetsBuilder()->buildAssetTypes($discoveryPackages);
+
+        // Let's get an array of values, indexed by asset type (to store in the discovery_values.php file)
+        $values = array_map(function(AssetType $assetType) {
+            return $assetType->getValues();
+        }, $assetTypes);
+
+        $fileSystem->dumpFile('.discovery/discovery_values.php', '<?php
+return '.var_export($values, true).";\n");
+
+        // Let's get an array of assetTypes, indexed by asset type (to store in the discovery_asset_types.php file)
+        $assetTypes = array_map(function(AssetType $assetType) {
+            return $assetType->jsonSerialize();
+        }, $assetTypes);
+
+        $fileSystem->dumpFile('.discovery/discovery_asset_types.php', '<?php
+return '.var_export($assetTypes, true).";\n");
 
         // Let's copy the Discovery class in the .discovery directory. This is needed because otherwise, we have no way to "find" the .discovery directory easily.
         $fileSystem->dumpFile('.discovery/Discovery.php', file_get_contents(__DIR__.'/Discovery.php.tpl'));
@@ -86,62 +109,7 @@ return '.var_export($finalArray, true).";\n");
         });
     }
 
-    /**
-     * Returns the parsed JSON of the discovery.json file of a package.
-     *
-     * @param PackageInterface $package
-     *
-     * @return array
-     *
-     * @throws \TheCodingMachine\Discovery\Utils\JsonException
-     */
-    private function getDiscoveryJson(PackageInterface $package) : array
-    {
-        $installationManager = $this->composer->getInstallationManager();
-        $packageInstallPath = $installationManager->getInstallPath($package);
 
-        $path = $packageInstallPath.'/discovery.json';
-
-        $jsonParser = new JsonParser();
-        try {
-            $result = $jsonParser->parse(file_get_contents($path), JsonParser::PARSE_TO_ASSOC);
-        } catch (ParsingException $e) {
-            throw new JsonException(sprintf('Invalid JSON in file "%s": %s', $path, $e->getMessage()), 0, $e);
-        }
-
-        if (!is_array($result)) {
-            throw new JsonException(sprintf('File "%s" should contain a JSON object.', $path));
-        }
-
-        return $result;
-    }
-
-    /**
-     * Builds the array that will be exported in the generated TheCodingMachine\Discovery class.
-     *
-     * @param PackageInterface[] $discoveryPackages
-     *
-     * @return array
-     */
-    private function buildFinalArray(array $discoveryPackages) : array
-    {
-        $array = [];
-
-        foreach ($discoveryPackages as $package) {
-            $json = $this->getDiscoveryJson($package);
-
-            foreach ($json as $key => $values) {
-                $existingValues = $array[$key] ?? [];
-                if (!is_array($values)) {
-                    $values = [$values];
-                }
-                $existingValues = array_merge($existingValues, $values);
-                $array[$key] = $existingValues;
-            }
-        }
-
-        return $array;
-    }
 
     /**
      * This registers the generated TheCodingMachine\Discovery class in the autoloader.
