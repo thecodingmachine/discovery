@@ -6,6 +6,7 @@ namespace TheCodingMachine\Discovery;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Plugin\PluginInterface;
@@ -13,7 +14,7 @@ use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Seld\JsonLint\JsonParser;
 use Seld\JsonLint\ParsingException;
-use TheCodingMachine\Discovery\Utils\FileSystem;
+use Symfony\Component\Filesystem\Filesystem;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
 class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
@@ -49,7 +50,8 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
     private function getAssetsBuilder() : AssetsBuilder
     {
         $installationManager = $this->composer->getInstallationManager();
-        return new AssetsBuilder($installationManager, $this->io);
+        $rootDir = dirname(Factory::getComposerFile());
+        return new AssetsBuilder($installationManager, $this->io, $rootDir);
     }
 
     public function beforeDumpAutoload(Event $event)
@@ -59,7 +61,7 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
             return;
         }
 
-        $fileSystem = new FileSystem();
+        $fileSystem = new Filesystem();
 
         $discoveryPackages = $this->getDiscoveryPackages();
         $assetTypes = $this->getAssetsBuilder()->buildAssetTypes($discoveryPackages);

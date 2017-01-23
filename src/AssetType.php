@@ -4,7 +4,7 @@ namespace TheCodingMachine\Discovery;
 /**
  * An asset type is essentially an array of Assets
  */
-class AssetType implements \JsonSerializable
+class AssetType implements \JsonSerializable, AssetTypeInterface
 {
     /**
      * @var string

@@ -7,6 +7,4 @@ rsync -av .. fixtures/copy/ --exclude tests --exclude vendor
 
 COMPOSER=composer-test.json composer update -v
 
-php test.php
-
 rm -rf fixtures/copy

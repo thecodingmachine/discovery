@@ -19,6 +19,10 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <directory suffix=".php">tests/.discovery</directory>
+            <exclude>
+                <file>src/DiscoveryPlugin.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <logging>

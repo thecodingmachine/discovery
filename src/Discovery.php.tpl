@@ -10,8 +10,18 @@ class Discovery implements DiscoveryInterface
 {
     private static $instance;
 
+    /**
+     * @var string[]
+     */
     private $values;
+    /**
+     * @var AssetType[]
+     */
     private $assetTypes;
+    /**
+     * @var array[]
+     */
+    private $assetTypesArray;
 
     /**
      * Singleton. Noone creates this object directly.
@@ -19,7 +29,7 @@ class Discovery implements DiscoveryInterface
     private function __construct()
     {
         $this->values = require __DIR__.'/discovery_values.php';
-        $this->assets = require __DIR__.'/discovery_asset_types.php';
+        $this->assetTypesArray = require __DIR__.'/discovery_asset_types.php';
     }
 
     /**
@@ -36,7 +46,7 @@ class Discovery implements DiscoveryInterface
     }
 
     /**
-     * Returns the assets of the requested type.
+     * Returns the asset values of the requested type.
      *
      * If no assets are found, an empty array is returned.
      *
@@ -46,5 +56,25 @@ class Discovery implements DiscoveryInterface
     public function get(string $assetType) : array
     {
         return $this->values[$assetType] ?? [];
+    }
+
+    /**
+     * Returns an asset type object for the requested type.
+     *
+     * If no assets are found, an AssetType object containing no assets is returned.
+     *
+     * @param string $assetType
+     * @return AssetTypeInterface
+     */
+    public function getAssetType(string $assetType) : AssetTypeInterface
+    {
+        if (!isset($this->assetTypes[$assetType])) {
+            if (isset($this->assetTypesArray[$assetType])) {
+                $this->assetTypes[$assetType] = ImmutableAssetType::fromArray($assetType, $this->assetTypesArray[$assetType]);
+            } else {
+                $this->assetTypes[$assetType] = ImmutableAssetType::fromArray($assetType, []);
+            }
+        }
+        return $this->assetTypes[$assetType];
     }
 }

@@ -116,12 +116,13 @@ Notice in this example that the value passed is no longer a string, it is an obj
 Metadata can be queried using the `getAssets()` method that will return complete `Asset` objects:
 
 ```php
-$assets = TheCodingMachine\Discovery::getInstance()->getAssets('some_asset_type');
+$assetType = TheCodingMachine\Discovery::getInstance()->getAssetType('some_asset_type');
 
-foreach ($assets as $asset) {
+foreach ($assetType->getAssets() as $asset) {
     $value = $asset->getValue();
     $meta = $asset->getMetadata();
     $package = $asset->getPackage(); // The name of the composer package this asset comes from
+    $packageDir = $asset->getPackageDir(); // The directory of the package
     $priority = $asset->getPriority(); // The priority (if configured, see below)
 }
 ```
@@ -189,3 +190,22 @@ Puli is more strict. Packages publishing assets need to include a package that "
 Puli is a complex project with more dependencies. It features many packages with many dependencies. Those dependencies can sometime be in conflict with your project. For instance, Puli uses ramsey/uuid 2.0 while Laravel 5.3 uses ramsey/uuid 3.0, making both incompatible. By comparison, thecodingmachine/discovery has no dependencies.
 
 Puli is independent from Composer. This has pros and cons. As such, when assets are imported, it has no way to order them "by dependency", which is often what the user wants.
+
+Running unit tests
+------------------
+
+Unit/integration tests are run in 2 steps.
+
+First step: execute the plugin in Composer
+
+```
+cd tests/
+./run.sh
+```
+
+Second step: run unit tests
+
+```
+cd ..
+vendor/bin/phpunit
+```

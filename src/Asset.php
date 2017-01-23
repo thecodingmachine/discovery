@@ -104,4 +104,9 @@ class Asset implements \JsonSerializable
             'metadata' => $this->getMetadata()
         ];
     }
+
+    public static function fromArray(array $array) : Asset
+    {
+        return new self($array['value'], $array['package'], $array['packageDir'], $array['priority'], $array['metadata']);
+    }
 }

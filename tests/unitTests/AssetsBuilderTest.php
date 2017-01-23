@@ -23,7 +23,7 @@ class AssetsBuilderTest extends \PHPUnit_Framework_TestCase
 
         $io = new BufferIO();
 
-        $assetsBuilder = new AssetsBuilder($installationManager, $io);
+        $assetsBuilder = new AssetsBuilder($installationManager, $io, '.');
         $assetTypes = $assetsBuilder->buildAssetTypes([ $packageA ]);
 
         $this->assertCount(1, $assetTypes);
@@ -44,7 +44,7 @@ class AssetsBuilderTest extends \PHPUnit_Framework_TestCase
 
         $io = new BufferIO();
 
-        $assetsBuilder = new AssetsBuilder($installationManager, $io);
+        $assetsBuilder = new AssetsBuilder($installationManager, $io, '.');
         $assetTypes = $assetsBuilder->buildAssetTypes([ $packageA ]);
 
         $this->assertCount(0, $assetTypes);

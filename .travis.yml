@@ -9,8 +9,8 @@ before_script:
  - php composer.phar install --no-interaction
 
 script:
- - vendor/bin/phpunit
  - cd tests; ./run.sh
+ - vendor/bin/phpunit
 
 after_script:
  - php vendor/bin/coveralls -v

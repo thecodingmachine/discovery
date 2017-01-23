@@ -5,6 +5,7 @@ namespace TheCodingMachine\Discovery;
 use Composer\Installer\InstallationManager;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
 /**
@@ -22,11 +23,16 @@ class AssetsBuilder
      * @var IOInterface
      */
     private $io;
+    /**
+     * @var string
+     */
+    private $rootDir;
 
-    public function __construct(InstallationManager $installationManager, IOInterface $io)
+    public function __construct(InstallationManager $installationManager, IOInterface $io, string $rootDir)
     {
         $this->installationManager = $installationManager;
         $this->io = $io;
+        $this->rootDir = $rootDir;
     }
 
 
@@ -75,11 +81,14 @@ class AssetsBuilder
     {
         $packageInstallPath = $this->installationManager->getInstallPath($package);
 
+        $fileSystem = new Filesystem();
+
+        $packageDir = $fileSystem->makePathRelative($packageInstallPath, realpath($this->rootDir));
+
         $path = $packageInstallPath.'/discovery.json';
 
         $discoveryFileLoader = new DiscoveryFileLoader();
 
-        return $discoveryFileLoader->loadDiscoveryFile(new \SplFileInfo($path), $package->getName(), $path);
+        return $discoveryFileLoader->loadDiscoveryFile(new \SplFileInfo($path), $package->getName(), $packageDir);
     }
-
 }
