@@ -3,7 +3,6 @@
 
 namespace TheCodingMachine\Discovery;
 
-
 class AssetTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testAssetTypeName()

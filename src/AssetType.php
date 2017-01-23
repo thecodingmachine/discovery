@@ -36,7 +36,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
             $this->assets[] = $operation->getAsset();
         } else {
             // This is a remove!
-            $this->assets = array_values(array_filter($this->assets, function(Asset $asset) use ($operation) {
+            $this->assets = array_values(array_filter($this->assets, function (Asset $asset) use ($operation) {
                 return $asset->getValue() !== $operation->getAsset()->getValue();
             }));
         }
@@ -54,7 +54,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
         }
 
         // Let's order assets by priority.
-        $this->stableSort($this->assets, function(Asset $asset1, Asset $asset2) {
+        $this->stableSort($this->assets, function (Asset $asset1, Asset $asset2) {
             return $asset2->getPriority() <=> $asset1->getPriority();
         });
 
@@ -68,9 +68,12 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
      * @param $array
      * @param string $cmp_function
      */
-    private function stableSort(&$array, $cmp_function = 'strcmp') {
+    private function stableSort(&$array, $cmp_function = 'strcmp')
+    {
         // Arrays of size < 2 require no action.
-        if (count($array) < 2) return;
+        if (count($array) < 2) {
+            return;
+        }
         // Split the array in half
         $halfway = count($array) / 2;
         $array1 = array_slice($array, 0, $halfway);
@@ -89,14 +92,17 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
         while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
             if (call_user_func($cmp_function, $array1[$ptr1], $array2[$ptr2]) < 1) {
                 $array[] = $array1[$ptr1++];
-            }
-            else {
+            } else {
                 $array[] = $array2[$ptr2++];
             }
         }
         // Merge the remainder
-        while ($ptr1 < count($array1)) $array[] = $array1[$ptr1++];
-        while ($ptr2 < count($array2)) $array[] = $array2[$ptr2++];
+        while ($ptr1 < count($array1)) {
+            $array[] = $array1[$ptr1++];
+        }
+        while ($ptr2 < count($array2)) {
+            $array[] = $array2[$ptr2++];
+        }
     }
 
     /**
@@ -123,7 +129,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
      */
     public function getValues() : array
     {
-        return array_map(function(Asset $asset) {
+        return array_map(function (Asset $asset) {
             return $asset->getValue();
         }, $this->getAssets());
     }
@@ -137,7 +143,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
      */
     public function jsonSerialize()
     {
-        return array_map(function(Asset $asset) {
+        return array_map(function (Asset $asset) {
             return $asset->jsonSerialize();
         }, $this->getAssets());
     }

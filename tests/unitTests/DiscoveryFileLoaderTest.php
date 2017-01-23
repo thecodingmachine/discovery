@@ -3,7 +3,6 @@
 
 namespace TheCodingMachine\Discovery;
 
-
 use TheCodingMachine\Discovery\Utils\IOException;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
@@ -70,5 +69,4 @@ class DiscoveryFileLoaderTest extends \PHPUnit_Framework_TestCase
         $this->expectException(IOException::class);
         $loader->loadDiscoveryFile(new \SplFileInfo(__DIR__.'/../fixtures/notexist.json'), 'fixture/package_a', 'vendor/fixture/package_a');
     }
-
 }

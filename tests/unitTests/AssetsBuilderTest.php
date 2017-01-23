@@ -3,7 +3,6 @@
 
 namespace TheCodingMachine\Discovery;
 
-
 use Composer\Installer\InstallationManager;
 use Composer\IO\BufferIO;
 use Composer\Package\Package;

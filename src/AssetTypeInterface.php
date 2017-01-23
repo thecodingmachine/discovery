@@ -1,7 +1,6 @@
 <?php
 namespace TheCodingMachine\Discovery;
 
-
 /**
  * An asset type is essentially an array of Assets
  */

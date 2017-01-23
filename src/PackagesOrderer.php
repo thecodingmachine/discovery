@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace TheCodingMachine\Discovery;
 
@@ -9,7 +9,7 @@ use Composer\Package\PackageInterface;
 
 /**
  * This class is dedicated to reordering packages.
- * 
+ *
  * @author David Negrier
  */
 class PackagesOrderer

@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace TheCodingMachine\Discovery;
 
@@ -67,7 +67,7 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
         $assetTypes = $this->getAssetsBuilder()->buildAssetTypes($discoveryPackages);
 
         // Let's get an array of values, indexed by asset type (to store in the discovery_values.php file)
-        $values = array_map(function(AssetType $assetType) {
+        $values = array_map(function (AssetType $assetType) {
             return $assetType->getValues();
         }, $assetTypes);
 
@@ -75,7 +75,7 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
 return '.var_export($values, true).";\n");
 
         // Let's get an array of assetTypes, indexed by asset type (to store in the discovery_asset_types.php file)
-        $assetTypes = array_map(function(AssetType $assetType) {
+        $assetTypes = array_map(function (AssetType $assetType) {
             return $assetType->jsonSerialize();
         }, $assetTypes);
 

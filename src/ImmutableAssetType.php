@@ -47,7 +47,7 @@ class ImmutableAssetType implements AssetTypeInterface
      */
     public static function fromArray(string $name, array $assetsArray) : ImmutableAssetType
     {
-        $assets = array_map(function(array $assetArray) {
+        $assets = array_map(function (array $assetArray) {
             return Asset::fromArray($assetArray);
         }, $assetsArray);
         return new self($name, $assets);

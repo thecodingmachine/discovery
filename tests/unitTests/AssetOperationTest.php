@@ -3,7 +3,6 @@
 
 namespace TheCodingMachine\Discovery;
 
-
 use TheCodingMachine\Discovery\Utils\JsonException;
 
 class AssetOperationTest extends \PHPUnit_Framework_TestCase
@@ -59,5 +58,4 @@ class AssetOperationTest extends \PHPUnit_Framework_TestCase
         $this->expectException(InvalidArgumentException::class);
         new AssetOperation('boom', new Asset("value", "package", "packagedir", 0, []));
     }
-
 }

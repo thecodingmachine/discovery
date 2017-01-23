@@ -2,6 +2,7 @@
 
 
 namespace TheCodingMachine\Discovery;
+
 use TheCodingMachine\Discovery\Utils\JsonException;
 
 /**

@@ -2,6 +2,7 @@
 
 
 namespace TheCodingMachine\Discovery;
+
 use Seld\JsonLint\JsonParser;
 use Seld\JsonLint\ParsingException;
 use TheCodingMachine\Discovery\Utils\IOException;

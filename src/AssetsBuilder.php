@@ -2,6 +2,7 @@
 
 
 namespace TheCodingMachine\Discovery;
+
 use Composer\Installer\InstallationManager;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;

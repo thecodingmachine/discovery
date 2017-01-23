@@ -33,7 +33,6 @@ class Asset implements \JsonSerializable
 
     public function __construct(string $value, string $package, string $packageDir, float $priority, $metadata)
     {
-
         $this->value = $value;
         $this->package = $package;
         $this->packageDir = $packageDir;
