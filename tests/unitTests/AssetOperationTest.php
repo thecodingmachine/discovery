@@ -37,6 +37,17 @@ class AssetOperationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('vendor/bar/baz', $assetOperation->getAsset()->getPackageDir());
     }
 
+    public function testBuildFromArrayWithMissingValues()
+    {
+        $assetOperation = AssetOperation::buildFromArray([
+            'value' => 'foo',
+        ], 'bar/baz', 'vendor/bar/baz');
+        $this->assertSame(AssetOperation::ADD, $assetOperation->getOperation());
+        $this->assertSame('foo', $assetOperation->getAsset()->getValue());
+        $this->assertSame(0.0, $assetOperation->getAsset()->getPriority());
+        $this->assertSame([], $assetOperation->getAsset()->getMetadata());
+    }
+
     public function testBuildFromArrayWithBadKey()
     {
         $this->expectException(JsonException::class);

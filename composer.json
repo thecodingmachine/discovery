@@ -19,7 +19,9 @@
     "require-dev": {
         "composer/composer": "^1.0",
         "satooshi/php-coveralls": "^1.0",
-        "phpunit/phpunit": "~5.0"
+        "phpunit/phpunit": "~5.0",
+        "humbug/humbug": "~1.0",
+        "squizlabs/php_codesniffer": "^2.7.0"
     },
     "autoload": {
         "psr-4": {
@@ -28,5 +30,7 @@
     },
     "extra": {
         "class": "TheCodingMachine\\Discovery\\DiscoveryPlugin"
-    }
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true
 }

@@ -42,6 +42,7 @@ class DiscoveryFileLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new DiscoveryFileLoader();
 
         $this->expectException(JsonException::class);
+        $this->expectExceptionCode(0);
         $loader->loadDiscoveryFile(new \SplFileInfo(__DIR__.'/../fixtures/error_cases/bad.json'), 'fixture/package_a', 'vendor/fixture/package_a');
     }
 
@@ -50,6 +51,7 @@ class DiscoveryFileLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new DiscoveryFileLoader();
 
         $this->expectException(JsonException::class);
+        $this->expectExceptionCode(0);
         $loader->loadDiscoveryFile(new \SplFileInfo(__DIR__.'/../fixtures/error_cases/bad2.json'), 'fixture/package_a', 'vendor/fixture/package_a');
     }
 

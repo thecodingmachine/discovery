@@ -5,12 +5,15 @@ php:
  - 7.1
 
 before_script:
- - wget http://getcomposer.org/composer.phar
- - php composer.phar install --no-interaction
+ - composer self-update
+ - composer clear-cache
+ - composer update
 
 script:
  - cd tests; ./run.sh
  - cd ..; vendor/bin/phpunit
+ - ./vendor/bin/phpcs --standard=PSR2 ./src/ ./tests/unitTests
+ - ./vendor/bin/humbug
 
 after_script:
  - php vendor/bin/coveralls -v

@@ -4,3 +4,6 @@ tests/.discovery
 tests/vendor
 tests/composer-test.lock
 build/
+.php_cs.cache
+humbuglog.txt
+humbuglog.json

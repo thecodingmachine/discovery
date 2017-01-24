@@ -45,4 +45,20 @@ class PackagesOrdererTest extends \PHPUnit_Framework_TestCase
         $result = PackagesOrderer::reorderPackages([$packageC, $packageB, $packageA]);
         $this->assertSame([$packageA, $packageB, $packageC], $result);
     }
+
+    /**
+     * Tests that unrelated packages are ordered alphabetically
+     */
+    public function testOrdererOnUnrelatedPackages()
+    {
+        $packageA = $this->getPackage('package/a', '1.0');
+        $packageB = $this->getPackage('package/b', '1.0');
+        $packageC = $this->getPackage('package/c', '1.0');
+        /* @var $packageA \Composer\Package\Package */
+        /* @var $packageB \Composer\Package\Package */
+        /* @var $packageC \Composer\Package\Package */
+
+        $result = PackagesOrderer::reorderPackages([$packageC, $packageB, $packageA]);
+        $this->assertSame([$packageA, $packageB, $packageC], $result);
+    }
 }
