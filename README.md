@@ -5,9 +5,9 @@ Discovery
 [![Total Downloads](https://poser.pugx.org/thecodingmachine/discovery/downloads)](https://packagist.org/packages/thecodingmachine/discovery)
 [![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/discovery/v/unstable)](https://packagist.org/packages/thecodingmachine/discovery)
 [![License](https://poser.pugx.org/thecodingmachine/discovery/license)](https://packagist.org/packages/thecodingmachine/discovery)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/discovery/badges/quality-score.png?b=1.0)](https://scrutinizer-ci.com/g/thecodingmachine/discovery/?branch=1.0)
-[![Build Status](https://travis-ci.org/thecodingmachine/discovery.svg?branch=1.0)](https://travis-ci.org/thecodingmachine/discovery)
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/discovery/badges/quality-score.png?b=1.1)](https://scrutinizer-ci.com/g/thecodingmachine/discovery/?branch=1.1)
+[![Build Status](https://travis-ci.org/thecodingmachine/discovery.svg?branch=1.1)](https://travis-ci.org/thecodingmachine/discovery)
+[![Coverage Status](https://coveralls.io/repos/thecodingmachine/discovery/badge.svg?branch=1.1&service=github)](https://coveralls.io/github/thecodingmachine/discovery?branch=1.1)
 
 Publish and discover assets in your PHP projects
 
@@ -56,6 +56,8 @@ $assets = TheCodingMachine\Discovery::getInstance()->get('some_asset_type');
 // This will scan all discovery.json files and returns an array of values.
 ```
 
+Each individual value MUST be a string.
+
 Install
 -------
 
@@ -89,12 +91,85 @@ They are excellent, thanks for asking! All data stored in `discovery.json` files
 
 If you are wondering, by default, the data is stored in the `.discovery` directory, at the root of your project. You can put the directory in your `.gitignore` if your want as the directory will be automatically regenerated on every `composer install`.
 
+
+Passing additional meta-data
+----------------------------
+
+Stored values are strings. Yet, if you need to pass more complex objects, you can add metadata to your value using the `meta` key.
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "meta": {
+                "some": "metadata",
+                "more": "metadata"
+            }
+        }
+    ]
+}
+```
+
+Notice in this example that the value passed is no longer a string, it is an object containing the `value` key (that contains the actual value) and the `meta` key (that contains the metadata).
+
+Metadata can be queried using the `getAssets()` method that will return complete `Asset` objects:
+
+```php
+$assetType = TheCodingMachine\Discovery::getInstance()->getAssetType('some_asset_type');
+
+foreach ($assetType->getAssets() as $asset) {
+    $value = $asset->getValue();
+    $meta = $asset->getMetadata();
+    $package = $asset->getPackage(); // The name of the composer package this asset comes from
+    $packageDir = $asset->getPackageDir(); // The directory of the package
+    $priority = $asset->getPriority(); // The priority (if configured, see below)
+}
+```
+
+Removing an asset added by another package
+------------------------------------------
+
+A package "B" can remove the assets added by another package "A" (assuming that package "B" requires "A").
+
+To do so, use the `action` key:
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "action": "remove"
+        }
+    ]
+}
+```
+
+This will remove "some_value" from the asset type "some_asset_type".
+
 What is the order for the assets?
 ---------------------------------
 
-Assets are returned in an order respecting the dependencies between packages.
+By default, assets are returned in an order respecting the dependencies between packages.
 
 So if package B depends on package A, then assets of package A will be returned before assets of package B.
+
+You can however alter this order using the `priority` modifier.
+
+```json
+{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "priority": 99
+        }
+    ]
+}
+```
+
+The default priority is 0.
+Values with higher priorities will come first in the array.
+Values with the same priority are ordered by package dependency order.
 
 Other projects providing discovery features
 -------------------------------------------
@@ -115,3 +190,22 @@ Puli is more strict. Packages publishing assets need to include a package that "
 Puli is a complex project with more dependencies. It features many packages with many dependencies. Those dependencies can sometime be in conflict with your project. For instance, Puli uses ramsey/uuid 2.0 while Laravel 5.3 uses ramsey/uuid 3.0, making both incompatible. By comparison, thecodingmachine/discovery has no dependencies.
 
 Puli is independent from Composer. This has pros and cons. As such, when assets are imported, it has no way to order them "by dependency", which is often what the user wants.
+
+Running unit tests
+------------------
+
+Unit/integration tests are run in 2 steps.
+
+First step: execute the plugin in Composer
+
+```
+cd tests/
+./run.sh
+```
+
+Second step: run unit tests
+
+```
+cd ..
+vendor/bin/phpunit
+```

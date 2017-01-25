@@ -1,14 +1,15 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace TheCodingMachine\Discovery;
 
+use Composer\Package\Link;
 use Composer\Package\PackageInterface;
 
 /**
  * This class is dedicated to reordering packages.
- * 
+ *
  * @author David Negrier
  */
 class PackagesOrderer
@@ -67,7 +68,7 @@ class PackagesOrderer
         foreach ($package->getRequires() as $require) {
             /* @var $require Link */
             foreach ($availablePackages as $iterPackage) {
-                if ($iterPackage->getName() == $require->getTarget()) {
+                if ($iterPackage->getName() === $require->getTarget()) {
                     $orderedPackagesList = self::walkPackagesList($iterPackage, $orderedPackagesList, $availablePackages);
                     break;
                 }
