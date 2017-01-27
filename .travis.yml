@@ -21,7 +21,7 @@ script:
  - cd ..; vendor/bin/phpunit
  - ./vendor/bin/phpcs --standard=PSR2 ./src/ ./tests/unitTests --config-set ignore_warnings_on_exit 1
  - ./vendor/bin/humbug
- - ./vendor/bin/couscous travis-auto-deploy --php-version=7.1
+ - ./vendor/bin/couscous travis-auto-deploy --php-version=7.1 --branch=1.1
 
 after_script:
  - php vendor/bin/coveralls -v
