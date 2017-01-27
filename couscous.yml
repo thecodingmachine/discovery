@@ -1,5 +1,6 @@
 template:
-    directory: template
+    #directory: template
+    url: https://github.com/thecodingmachine/tcm-couscous-template.git
     index: index.md
 
 exclude:
@@ -9,9 +10,10 @@ exclude:
     - node_modules
     - template
 
-#scripts:
-#    before:
-#        - lessc --clean-css website/less/main.less website/css/all.min.css
+
+scripts:
+    after:
+        - cd .couscous/generated && npm install && npm run build
 
 baseUrl: http://bestpractices.thecodingmachine.com
 
