@@ -10,7 +10,7 @@ Sometimes, a package declares an asset but you actually want to ignore this asse
 <img src="img/schema.png" alt="" />
 </div>
 <br/>
-
+git staus
 A package "A" can remove the assets added by another package "B" (assuming that package "A" requires "B").
 
 To do so, use the `action` key:
