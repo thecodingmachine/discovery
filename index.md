@@ -26,7 +26,7 @@ For your project, you are looking to search through all the installed packages f
 We offer a simple solution to solve this problem:
 
 <div class="text-center">
-<img src="doc/img/discovery.png" alt="" />
+<img class="img-responsive" src="doc/img/schema.png" alt="" />
 </div>
 
 <br/>

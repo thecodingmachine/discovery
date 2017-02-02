@@ -7,7 +7,7 @@ currentMenu: remove
 Sometimes, a package declares an asset but you actually want to ignore this asset in your project.
 
 <div class="text-center">
-<img src="img/discovery.png" alt="" />
+<img src="img/schema.png" alt="" />
 </div>
 <br/>
 
