@@ -16,7 +16,7 @@ exclude:
 #    after:
 #        - cd .couscous/generated && npm install && npm run build
 
-baseUrl: http://bestpractices.thecodingmachine.com
+baseUrl: https://thecodingmachine.github.io/discovery/
 
 site:
     title: Discovery
