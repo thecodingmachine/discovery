@@ -30,7 +30,10 @@
         }
     },
     "extra": {
-        "class": "TheCodingMachine\\Discovery\\DiscoveryPlugin"
+        "class": "TheCodingMachine\\Discovery\\DiscoveryPlugin",
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
     },
     "minimum-stability": "alpha",
     "prefer-stable": true
