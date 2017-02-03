@@ -1,0 +1,68 @@
+template:
+    #directory: template
+    url: https://github.com/thecodingmachine/tcm-couscous-template.git
+    index: index.md
+
+exclude:
+    - vendor
+    - bin
+    - tests
+    - node_modules
+    - template
+    - %gitignore%
+
+
+#scripts:
+#    after:
+#        - cd .couscous/generated && npm install && npm run build
+
+baseUrl: http://bestpractices.thecodingmachine.com
+
+site:
+    title: Discovery
+
+logo:
+    logo: doc/img/logo.png
+icon:
+        burger: doc/img/hamburger.png
+body:
+            bg: doc/img/bg.jpg
+
+githubForkUrl: https://github.com/thecodingmachine/discovery/blob/1.1/
+githubUrl: https://github.com/thecodingmachine/discovery
+
+menu:
+    items:
+        doc:
+            text: Documentation
+        discovery-introduction:
+            text: Introduction
+            relativeUrl: index.html
+            # Useful for active menu when we don't use the markdown metadata
+            originalUrl: index.md
+        metadata:
+            text: Passing additional metadata
+            relativeUrl: doc/metadata.html
+        remove:
+            text: Removing an asset
+            relativeUrl: doc/remove.html
+        order:
+            text: Managing assets order
+            relativeUrl: doc/order.html
+        schema:
+            text: discovery.json format
+            relativeUrl: doc/discovery_schema.html
+        conventions:
+            text: Naming conventions
+            relativeUrl: doc/conventions.html
+        adv:
+            text: Advanced
+        internals:
+            text: Internals and performance
+            relativeUrl: doc/internals.html
+        unit:
+            text: Running unit tests
+            relativeUrl: doc/unit_tests.html
+        alternatives:
+            text: Alternatives
+            relativeUrl: doc/alternatives.html

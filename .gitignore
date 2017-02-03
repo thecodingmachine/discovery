@@ -7,3 +7,5 @@ build/
 .php_cs.cache
 humbuglog.txt
 humbuglog.json
+template/
+.couscous/
