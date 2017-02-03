@@ -9,11 +9,12 @@ exclude:
     - tests
     - node_modules
     - template
+    - %gitignore%
 
 
-scripts:
-    after:
-        - cd .couscous/generated && npm install && npm run build
+#scripts:
+#    after:
+#        - cd .couscous/generated && npm install && npm run build
 
 baseUrl: http://bestpractices.thecodingmachine.com
 
@@ -21,8 +22,11 @@ site:
     title: Discovery
 
 logo:
-    white: doc/img/logo-final_blanc.png
-    black: doc/img/logo-final_noir.png
+    logo: doc/img/logo.png
+icon:
+        burger: doc/img/hamburger.png
+body:
+            bg: doc/img/bg.jpg
 
 githubForkUrl: https://github.com/thecodingmachine/discovery/blob/1.1/
 githubUrl: https://github.com/thecodingmachine/discovery
