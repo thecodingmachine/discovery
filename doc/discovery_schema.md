@@ -2,7 +2,6 @@
 title: discovery.json schema
 subTitle: Complete syntax
 currentMenu: schema
-theme: black
 ---
 
 ## **discovery.json** full syntax
