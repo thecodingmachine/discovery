@@ -12,9 +12,9 @@ exclude:
     - %gitignore%
 
 
-#scripts:
-#    after:
-#        - cd .couscous/generated && npm install && npm run build
+scripts:
+    after:
+        - cd .couscous/generated && npm install && npm run build
 
 baseUrl: https://thecodingmachine.github.io/discovery/
 
