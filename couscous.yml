@@ -5,7 +5,6 @@ template:
 
 exclude:
     - vendor
-    - bin
     - tests
     - node_modules
     - template
