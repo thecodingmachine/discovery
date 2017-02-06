@@ -1,0 +1,556 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+  overflow-x: hidden;
+  background-image: linear-gradient(to top, #F4F4F4 0%, #DFDEDC 100%);
+  color:dimgrey;
+}
+
+/* Toggle Styles */
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+
+#sidebar-wrapper {
+  top: 50px;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #222;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+
+  width: 100%;
+  position: absolute;
+  h1 {
+    overflow: hidden;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  h1:after {
+    background-color: #00a19a;
+    content: "";
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  h1:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+h2{
+  color:black;
+}
+
+  h2:after{
+    content:"▧";
+  }
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  h4{
+    color:#009d6b;
+  }
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+  font-size: 13px;
+  color: white;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    position: relative;
+    top: -145px;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+  .navbar-nav {
+    float: right;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    font-size: small;
+  }
+}
+
+#burger{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+@media (max-width: 768px){
+
+#page-content-wrapper {
+  position: relative;
+  top: -119px;
+}
+}
+
+.skew{
+  -webkit-transform: skew(0deg, -4deg);
+  transform: skew(0deg, -4deg);
+}
+
+.content{
+  -webkit-transform: skew(0deg, 4deg);
+  transform: skew(0deg, 4deg);
+}
+
+.pt100{
+  padding-top: 100px;
+}
+
+
+
+
+
+
+
+
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper h4.glitch {
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+  font-size: 100px;
+  padding: 50px;
+}
+.wrapper h4.glitch::before, .wrapper h1.glitch::after {
+  padding: 50px;
+  color: white;
+  content: "Dicovery";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  top: 0;
+}
+.wrapper h4.glitch::before {
+  left: 3px;
+  text-shadow: -2px 0 red;
+  animation-name: glitch-animation-1;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse-alternate;
+}
+.wrapper h4.glitch::after {
+  left: -3px;
+  text-shadow: -2px 0 blue;
+  animation-name: glitch-animation-2;
+  animation-duration: 14s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse-alternate;
+}
+
+@keyframes glitch-animation-1 {
+  0% {
+    clip: rect(55px, 800px, 123px, 30px);
+  }
+  5% {
+    clip: rect(124px, 800px, 40px, 30px);
+  }
+  10% {
+    clip: rect(137px, 800px, 94px, 30px);
+  }
+  15% {
+    clip: rect(31px, 800px, 96px, 30px);
+  }
+  20% {
+    clip: rect(116px, 800px, 95px, 30px);
+  }
+  25% {
+    clip: rect(36px, 800px, 90px, 30px);
+  }
+  30% {
+    clip: rect(97px, 800px, 134px, 30px);
+  }
+  35% {
+    clip: rect(116px, 800px, 30px, 30px);
+  }
+  40% {
+    clip: rect(146px, 800px, 29px, 30px);
+  }
+  45% {
+    clip: rect(27px, 800px, 113px, 30px);
+  }
+  50% {
+    clip: rect(5px, 800px, 21px, 30px);
+  }
+  55% {
+    clip: rect(48px, 800px, 19px, 30px);
+  }
+  60% {
+    clip: rect(114px, 800px, 62px, 30px);
+  }
+  65% {
+    clip: rect(21px, 800px, 118px, 30px);
+  }
+  70% {
+    clip: rect(66px, 800px, 84px, 30px);
+  }
+  75% {
+    clip: rect(22px, 800px, 97px, 30px);
+  }
+  80% {
+    clip: rect(104px, 800px, 33px, 30px);
+  }
+  85% {
+    clip: rect(79px, 800px, 57px, 30px);
+  }
+  90% {
+    clip: rect(43px, 800px, 42px, 30px);
+  }
+  95% {
+    clip: rect(113px, 800px, 130px, 30px);
+  }
+  100% {
+    clip: rect(62px, 800px, 140px, 30px);
+  }
+}
+@keyframes glitch-animation-2 {
+  0% {
+    clip: rect(54px, 800px, 34px, 30px);
+  }
+  5% {
+    clip: rect(8px, 800px, 27px, 30px);
+  }
+  10% {
+    clip: rect(20px, 800px, 13px, 30px);
+  }
+  15% {
+    clip: rect(147px, 800px, 100px, 30px);
+  }
+  20% {
+    clip: rect(95px, 800px, 135px, 30px);
+  }
+  25% {
+    clip: rect(2px, 800px, 2px, 30px);
+  }
+  30% {
+    clip: rect(55px, 800px, 14px, 30px);
+  }
+  35% {
+    clip: rect(124px, 800px, 99px, 30px);
+  }
+  40% {
+    clip: rect(76px, 800px, 144px, 30px);
+  }
+  45% {
+    clip: rect(101px, 800px, 68px, 30px);
+  }
+  50% {
+    clip: rect(4px, 800px, 140px, 30px);
+  }
+  55% {
+    clip: rect(115px, 800px, 38px, 30px);
+  }
+  60% {
+    clip: rect(97px, 800px, 26px, 30px);
+  }
+  65% {
+    clip: rect(32px, 800px, 94px, 30px);
+  }
+  70% {
+    clip: rect(77px, 800px, 34px, 30px);
+  }
+  75% {
+    clip: rect(107px, 800px, 41px, 30px);
+  }
+  80% {
+    clip: rect(87px, 800px, 130px, 30px);
+  }
+  85% {
+    clip: rect(7px, 800px, 36px, 30px);
+  }
+  90% {
+    clip: rect(40px, 800px, 59px, 30px);
+  }
+  95% {
+    clip: rect(137px, 800px, 47px, 30px);
+  }
+  100% {
+    clip: rect(82px, 800px, 36px, 30px);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/*
+ * Start Bootstrap - Full Width Pics (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+  margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.image-bg-fluid-height,
+.image-bg-fixed-height {
+  text-align: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.image-bg-fluid-height {
+  background: url('../../img/bg-web.jpg') no-repeat center center scroll;
+  margin-top: 18px;
+  padding: 81px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.image-bg-fixed-height {
+  background: url('../../img/bg-web.jpg') no-repeat center center scroll;
+  height: 450px;
+}
+
+.img-center {
+  margin: 0 auto;
+}
+
+section {
+  padding: 75px 0;
+}
+
+.section-heading {
+  margin: 30px 0;
+  font-size: 4em;
+}
+
+.section-lead {
+  margin: 30px 0;
+}
+
+.section-paragraph {
+  margin: 30px 0;
+}
+
+
+@media(max-width:768px) {
+  section {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  .section-heading {
+    font-size: 2em;
+  }
+}
+.navbar-header{
+  margin-left: 46%!important;
+}
+.burger-position{
+  position: fixed;
+  top: 51px;
+  padding: 11px 12px;
+  z-index: 92!important;
+  background-color: black;
+}
+.navbar-inverse {
+  background-color: black;
+  border-color:transparent;
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  display: initial;
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+.pulse2 {
+  -webkit-animation: pulse2 1s linear infinite;
+  -moz-animation: pulse2 1s linear infinite;
+  -ms-animation: pulse2 1s linear infinite;
+  animation: pulse2 1s linear infinite;
+}
+
+@keyframes "pulse2" {
+  0% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+}
+
+@-moz-keyframes pulse2 {
+  0% {
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  50% {
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  100% {
+    -moz-transform: scale(1);
+    transform: scale(1);
+  }
+
+}
+
+@-webkit-keyframes "pulse2" {
+  0% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@-ms-keyframes "pulse2" {
+  0% {
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  50% {
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  100% {
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Removing an asset | Discovery</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/dist/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/dist/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/dist/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/dist/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/dist/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/dist/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/dist/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/dist/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/dist/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/dist/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/dist/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/dist/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/dist/img/favicon/favicon-16x16.png">
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300,500" rel="stylesheet" type="text/css">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/dist/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="msapplication-TileColor" content="#f01d4f">
+    <meta name="msapplication-TileImage" content="//www.thecodingmachine.com/wp-content/themes/thecodingmachine/library/images/win8-tile-icon.png">
+
+    <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+    </style>
+                
+
+    <link rel='stylesheet' id='font-awesome-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='google-roboto-css'  href='//fonts.googleapis.com/css?family=Roboto%3A100%2C400%2C300%2C400italic%2C500%2C700' type='text/css' media='all' />
+
+
+    <!--    <script type='text/javascript' src='https://thecodingmachine.github.io/discovery/components/jquery/dist/jquery.js'></script>
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js'></script>
+    <script type='text/javascript' src='https://thecodingmachine.github.io/discovery/dist/js/template/script.js'></script>
+    <script type='text/javascript' src='https://thecodingmachine.github.io/discovery/components/highlightjs/highlight.pack.min.js'></script>-->
+
+
+    <style>
+        pre.hljs {padding: 5px;}
+        pre.hljs code {}
+            </style>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-10196481-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="">
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3&appId=1549118041971618";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="img-responsive" src="https://thecodingmachine.github.io/discovery/doc/img/logo.png" alt="" width="85px" style="position: absolute;">
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav text-left">
+                <li><a href="https://thecodingmachine.github.io/discovery/">ABOUT</a></li>
+                                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/index.html">
+                                Introduction
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/metadata.html">
+                                Passing additional metadata
+                            </a>
+                        </li>
+                                                                                <li class="active visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/remove.html">
+                                Removing an asset
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/order.html">
+                                Managing assets order
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/discovery_schema.html">
+                                discovery.json format
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/conventions.html">
+                                Naming conventions
+                            </a>
+                        </li>
+                                                                                                                    <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/internals.html">
+                                Internals and performance
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/unit_tests.html">
+                                Running unit tests
+                            </a>
+                        </li>
+                                                                                <li class=" visible-xs-block">
+                            <a href="https://thecodingmachine.github.io/discovery/doc/alternatives.html">
+                                Alternatives
+                            </a>
+                        </li>
+                                                    <li><a href="http://www.thecodingmachine.com/">TheCodingMachine</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Full Width Image Header with Logo -->
+<!-- Image backgrounds are set within the full-width-pics.css file. -->
+<div id="wrapper">
+    <a href="#menu-toggle" class="burger-position" id="menu-toggle" ><img src="https://thecodingmachine.github.io/discovery/doc/img/hamburger.png"> </a>
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+                                                <li>
+                        <h4>Documentation</h4>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/index.html">
+                            Introduction
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/metadata.html">
+                            Passing additional metadata
+                        </a>
+                    </li>
+                                                                <li class="active">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/remove.html">
+                            Removing an asset
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/order.html">
+                            Managing assets order
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/discovery_schema.html">
+                            discovery.json format
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/conventions.html">
+                            Naming conventions
+                        </a>
+                    </li>
+                                                                <li>
+                        <h4>Advanced</h4>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/internals.html">
+                            Internals and performance
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/unit_tests.html">
+                            Running unit tests
+                        </a>
+                    </li>
+                                                                <li class="">
+                        <a href="https://thecodingmachine.github.io/discovery/doc/alternatives.html">
+                            Alternatives
+                        </a>
+                    </li>
+                                    </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <header class="image-bg-fluid-height skew">
+            <div class="wrapper content">
+                <!-- /
+              <h4 class="glitch">DISCOVERY</h4>
+               -->
+            </div>
+
+        </header>
+        <div class="container pt100">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Removing an asset <small>added by another package</small></h1>                    <p>Sometimes, a package declares an asset but you actually want to ignore this asset in your project.</p>
+<div class="text-center">
+<img src="img/schema.png" alt=""></div>
+<p><br/>
+A package &quot;A&quot; can remove the assets added by another package &quot;B&quot; (assuming that package &quot;A&quot; requires &quot;B&quot;).</p>
+<p>To do so, use the <code>action</code> key:</p>
+<div class="text-center"><code>discovery.json</code> for package B</div>
+<pre><code class="language-json">{
+    "some_asset_type": "some_value"
+}</code></pre>
+<div class="text-center"><code>discovery.json</code> for package A</div>
+<pre><code class="language-json">{
+    "some_asset_type": [
+        {
+            "value": "some_value",
+            "action": "remove"
+        }
+    ]
+}</code></pre>
+<p>This will remove &quot;some_value&quot; from the asset type &quot;some_asset_type&quot;.</p>
+<div class="alert alert-info">
+Note that the root package of your project can also declare a <code>discovery.json</code> file. This is the best place to remove assets added by a package that you don't need.
+</div>
+
+                    <p class="fork-and-edit">
+                        Found a typo? Something is wrong in this documentation? Just
+                        <a href="https://github.com/thecodingmachine/discovery/blob/1.1/doc/remove.md">fork and edit it</a>!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+
+</div>
+<div class="footer">
+    <div class="container-fluid">
+        <footer class="row" id="footer">
+            <div class="col-xs-12">
+                Made with <span class="pulse2 glyphicon glyphicon-heart" style="color: red" aria-hidden="true"></span><span class="sr-only">love</span> by <a href="https://www.thecodingmachine.com/"><img src="https://thecodingmachine.github.io/discovery/img/logo.png" alt="TheCodingMachine"></a> for all open-source lovers
+                <span class="copyright">&copy; 2016 - 2017 <a href="https://www.thecodingmachine.com/">TheCodingMachine</a> - All Rights Reserved</span>
+                <span class="design-by">Design by <a href="http://www.borislopez.fr/" target="_blank">Boris Lopez</a><br/>
+                Powered by <a href="http://couscous.io/">Couscous</a></span>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- /#wrapper -->
+<script type='text/javascript' src='https://thecodingmachine.github.io/discovery/build/app.bundle.js'></script>
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+</body>
+</html>
