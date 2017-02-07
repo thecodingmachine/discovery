@@ -1,16 +1,13 @@
-/*!
- * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
 
 body {
   overflow-x: hidden;
   background-image: linear-gradient(to top, #F4F4F4 0%, #DFDEDC 100%);
   color:dimgrey;
+  margin-top: 50px;
 }
 
 /* Toggle Styles */
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -22,8 +19,6 @@ body {
 #wrapper.toggled {
   padding-left: 250px;
 }
-
-
 #sidebar-wrapper {
   top: 50px;
   position: fixed;
@@ -38,11 +33,9 @@ body {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-
 #wrapper.toggled #sidebar-wrapper {
   width: 250px;
 }
-
 #page-content-wrapper {
 
   width: 100%;
@@ -53,7 +46,6 @@ body {
     font-weight: bold;
     text-transform: uppercase;
   }
-
   h1:after {
     background-color: #00a19a;
     content: "";
@@ -75,7 +67,6 @@ h2{
     content:"▧";
   }
 }
-
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
@@ -93,13 +84,12 @@ h2{
   h4{
     color:#009d6b;
   }
-}
-
-.sidebar-nav li {
-  text-indent: 20px;
-  line-height: 40px;
-  font-size: 13px;
-  color: white;
+  li {
+    text-indent: 20px;
+    line-height: 40px;
+    font-size: 13px;
+    color: white;
+  }
 }
 
 .sidebar-nav li a {
@@ -153,7 +143,7 @@ h2{
 
   #page-content-wrapper {
     position: relative;
-    top: -145px;
+    top: -50px;
   }
   #wrapper.toggled #page-content-wrapper {
     position: relative;
@@ -168,7 +158,6 @@ h2{
     font-size: small;
   }
 }
-
 #burger{
   position: absolute;
   top: 15px;
@@ -178,7 +167,7 @@ h2{
 
 #page-content-wrapper {
   position: relative;
-  top: -119px;
+  top: -70px;
 }
 }
 
@@ -197,207 +186,12 @@ h2{
 }
 
 
-
-
-
-
-
-
-
 .wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.wrapper h4.glitch {
-  color: white;
-  font-family: sans-serif;
-  position: relative;
-  font-size: 100px;
-  padding: 50px;
-}
-.wrapper h4.glitch::before, .wrapper h1.glitch::after {
-  padding: 50px;
-  color: white;
-  content: "Dicovery";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: black;
-  overflow: hidden;
-  top: 0;
-}
-.wrapper h4.glitch::before {
-  left: 3px;
-  text-shadow: -2px 0 red;
-  animation-name: glitch-animation-1;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-delay: 0s;
-  animation-iteration-count: infinite;
-  animation-direction: reverse-alternate;
-}
-.wrapper h4.glitch::after {
-  left: -3px;
-  text-shadow: -2px 0 blue;
-  animation-name: glitch-animation-2;
-  animation-duration: 14s;
-  animation-timing-function: linear;
-  animation-delay: 0s;
-  animation-iteration-count: infinite;
-  animation-direction: reverse-alternate;
-}
-
-@keyframes glitch-animation-1 {
-  0% {
-    clip: rect(55px, 800px, 123px, 30px);
-  }
-  5% {
-    clip: rect(124px, 800px, 40px, 30px);
-  }
-  10% {
-    clip: rect(137px, 800px, 94px, 30px);
-  }
-  15% {
-    clip: rect(31px, 800px, 96px, 30px);
-  }
-  20% {
-    clip: rect(116px, 800px, 95px, 30px);
-  }
-  25% {
-    clip: rect(36px, 800px, 90px, 30px);
-  }
-  30% {
-    clip: rect(97px, 800px, 134px, 30px);
-  }
-  35% {
-    clip: rect(116px, 800px, 30px, 30px);
-  }
-  40% {
-    clip: rect(146px, 800px, 29px, 30px);
-  }
-  45% {
-    clip: rect(27px, 800px, 113px, 30px);
-  }
-  50% {
-    clip: rect(5px, 800px, 21px, 30px);
-  }
-  55% {
-    clip: rect(48px, 800px, 19px, 30px);
-  }
-  60% {
-    clip: rect(114px, 800px, 62px, 30px);
-  }
-  65% {
-    clip: rect(21px, 800px, 118px, 30px);
-  }
-  70% {
-    clip: rect(66px, 800px, 84px, 30px);
-  }
-  75% {
-    clip: rect(22px, 800px, 97px, 30px);
-  }
-  80% {
-    clip: rect(104px, 800px, 33px, 30px);
-  }
-  85% {
-    clip: rect(79px, 800px, 57px, 30px);
-  }
-  90% {
-    clip: rect(43px, 800px, 42px, 30px);
-  }
-  95% {
-    clip: rect(113px, 800px, 130px, 30px);
-  }
-  100% {
-    clip: rect(62px, 800px, 140px, 30px);
-  }
-}
-@keyframes glitch-animation-2 {
-  0% {
-    clip: rect(54px, 800px, 34px, 30px);
-  }
-  5% {
-    clip: rect(8px, 800px, 27px, 30px);
-  }
-  10% {
-    clip: rect(20px, 800px, 13px, 30px);
-  }
-  15% {
-    clip: rect(147px, 800px, 100px, 30px);
-  }
-  20% {
-    clip: rect(95px, 800px, 135px, 30px);
-  }
-  25% {
-    clip: rect(2px, 800px, 2px, 30px);
-  }
-  30% {
-    clip: rect(55px, 800px, 14px, 30px);
-  }
-  35% {
-    clip: rect(124px, 800px, 99px, 30px);
-  }
-  40% {
-    clip: rect(76px, 800px, 144px, 30px);
-  }
-  45% {
-    clip: rect(101px, 800px, 68px, 30px);
-  }
-  50% {
-    clip: rect(4px, 800px, 140px, 30px);
-  }
-  55% {
-    clip: rect(115px, 800px, 38px, 30px);
-  }
-  60% {
-    clip: rect(97px, 800px, 26px, 30px);
-  }
-  65% {
-    clip: rect(32px, 800px, 94px, 30px);
-  }
-  70% {
-    clip: rect(77px, 800px, 34px, 30px);
-  }
-  75% {
-    clip: rect(107px, 800px, 41px, 30px);
-  }
-  80% {
-    clip: rect(87px, 800px, 130px, 30px);
-  }
-  85% {
-    clip: rect(7px, 800px, 36px, 30px);
-  }
-  90% {
-    clip: rect(40px, 800px, 59px, 30px);
-  }
-  95% {
-    clip: rect(137px, 800px, 47px, 30px);
-  }
-  100% {
-    clip: rect(82px, 800px, 36px, 30px);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-/*
- * Start Bootstrap - Full Width Pics (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-
-body {
-  margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 .image-bg-fluid-height,
