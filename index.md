@@ -35,6 +35,21 @@ We offer a simple solution to solve this problem:
 - you include `thecodingmachine/discovery` in your project
 - you use the `TheCodingMachine\Discovery` class to explore the available assets
 
+A real use case
+---------------
+
+Discovery should be of great use to framework developers.
+
+Look at the way most frameworks handle the installation of bundles/modules:
+ 
+ 1. you add the module to your project using `composer.json`
+ 2. then you need to register the class of the module/bundle/service provider in your project
+
+This second step is completely useless. If a developer adds a Composer dependency, it is almost always to use it. It would be great if the framework could easily explorer composer packages and find modules/bundles or service providers by itself.
+
+Discovery allows this.
+
+
 discovery.json format
 -----------------------
 
