@@ -6,7 +6,7 @@ module.exports = {
     entry: path.resolve(__dirname, './app.js'),
     output: {
         path: './build/',
-        publicPath: "/discovery/build/",
+        publicPath: "./",
         filename: 'app.bundle.js',
         //library: libraryName,
         //libraryTarget: 'umd',
