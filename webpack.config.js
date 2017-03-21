@@ -6,7 +6,6 @@ module.exports = {
     entry: path.resolve(__dirname, './app.js'),
     output: {
         path: './build/',
-        publicPath: "./",
         filename: 'app.bundle.js',
         //library: libraryName,
         //libraryTarget: 'umd',
@@ -20,30 +19,30 @@ module.exports = {
             { test: /\.png$/, loader: "url-loader?limit=100000",
                 query: {
                     name: 'images/[name].[ext]',
-                    publicPath: '/build/'
+                    publicPath: './build/'
                 }},
             { test: /\.jpg$/, loader: "file-loader",
                 query: {
                     name: 'images/[name].[ext]',
-                    publicPath: '/build/'
+                    publicPath: './build/'
                 }},
             { test: /\.gif$/, loader: "file-loader",
                 query: {
                     name: 'images/[name].[ext]',
-                    publicPath: '/build/'
+                    publicPath: './build/'
                 }},
             { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader",
                 query: {
                     limit: 10000,
                     mimetype: 'application/font-woff',
                     name: 'fonts/[name].[ext]',
-                    publicPath: '/build/'
+                    publicPath: './build/'
                 }},
             { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader",
                 query: {
                     limit: 10000,
                     name: 'fonts/[name].[ext]',
-                    publicPath: '/build/'
+                    publicPath: './build/'
                 }},
 
             /*{ test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url-loader?limit=10000' },*/
