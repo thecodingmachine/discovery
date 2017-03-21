@@ -8,3 +8,7 @@ humbuglog.txt
 humbuglog.json
 template/
 .couscous/
+/tests/fixtures/copy/
+/npm-debug.log
+/template
+/build

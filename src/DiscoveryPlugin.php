@@ -9,15 +9,15 @@ use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Composer\Plugin\Capability\CommandProvider;
+use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
-use Seld\JsonLint\JsonParser;
-use Seld\JsonLint\ParsingException;
 use Symfony\Component\Filesystem\Filesystem;
-use TheCodingMachine\Discovery\Utils\JsonException;
+use TheCodingMachine\Discovery\Commands\CommandProvider as DiscoveryCommandProvider;
 
-class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
+class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface, Capable
 {
     /**
      * @var Composer
@@ -63,8 +63,8 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface
 
         $fileSystem = new Filesystem();
 
-        $discoveryPackages = $this->getDiscoveryPackages();
-        $assetTypes = $this->getAssetsBuilder()->buildAssetTypes($discoveryPackages);
+        $localRepos = $this->composer->getRepositoryManager()->getLocalRepository();
+        $assetTypes = $this->getAssetsBuilder()->findAssetTypes($localRepos);
 
         // Let's get an array of values, indexed by asset type (to store in the discovery_values.php file)
         $values = array_map(function (AssetType $assetType) {
@@ -89,31 +89,6 @@ return '.var_export($assetTypes, true).";\n");
     }
 
     /**
-     * Returns the list of packages containing a "discovery.json" file in the root directory.
-     *
-     * Packages are ordered by dependencies.
-     *
-     * @return PackageInterface[]
-     */
-    private function getDiscoveryPackages()
-    {
-        $localRepos = $this->composer->getRepositoryManager()->getLocalRepository();
-        $unorderedPackagesList = $localRepos->getPackages();
-
-        $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
-
-        return array_filter($orderedPackageList, function (PackageInterface $package) {
-            $installationManager = $this->composer->getInstallationManager();
-
-            $packageInstallPath = $installationManager->getInstallPath($package);
-
-            return file_exists($packageInstallPath.'/discovery.json');
-        });
-    }
-
-
-
-    /**
      * This registers the generated TheCodingMachine\Discovery class in the autoloader.
      */
     private function registerClassInAutoloader()
@@ -123,5 +98,30 @@ return '.var_export($assetTypes, true).";\n");
         $autoload = $this->composer->getPackage()->getAutoload();
         $autoload['classmap'][] = $discoveryFile;
         $this->composer->getPackage()->setAutoload($autoload);
+    }
+
+    /**
+     * Method by which a Plugin announces its API implementations, through an array
+     * with a special structure.
+     *
+     * The key must be a string, representing a fully qualified class/interface name
+     * which Composer Plugin API exposes.
+     * The value must be a string as well, representing the fully qualified class name
+     * of the implementing class.
+     *
+     * @tutorial
+     *
+     * return array(
+     *     'Composer\Plugin\Capability\CommandProvider' => 'My\CommandProvider',
+     *     'Composer\Plugin\Capability\Validator'       => 'My\Validator',
+     * );
+     *
+     * @return string[]
+     */
+    public function getCapabilities()
+    {
+        return [
+            CommandProvider::class => DiscoveryCommandProvider::class,
+        ];
     }
 }

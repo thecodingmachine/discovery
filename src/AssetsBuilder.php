@@ -6,6 +6,7 @@ namespace TheCodingMachine\Discovery;
 use Composer\Installer\InstallationManager;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Composer\Repository\RepositoryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
@@ -36,6 +37,28 @@ class AssetsBuilder
         $this->rootDir = $rootDir;
     }
 
+    /**
+     * Find discovery.json files in the passed repository and builds an asset type.
+     *
+     * @param RepositoryInterface $repository
+     * @return array
+     */
+    public function findAssetTypes(RepositoryInterface $repository) : array
+    {
+        $unorderedPackagesList = $repository->getPackages();
+
+        $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
+
+        $packages = array_filter($orderedPackageList, function (PackageInterface $package) {
+            $installationManager = $this->installationManager;
+
+            $packageInstallPath = $installationManager->getInstallPath($package);
+
+            return file_exists($packageInstallPath.'/discovery.json');
+        });
+
+        return $this->buildAssetTypes($packages);
+    }
 
     /**
      * Builds the AssetTypes that will be exported in the generated TheCodingMachine\Discovery class.
