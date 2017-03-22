@@ -68,8 +68,17 @@ h2{
   }
 }
 #wrapper.toggled #page-content-wrapper {
-  position: absolute;
+  /* position: absolute; */
   margin-right: -250px;
+
+
+}
+
+// Fix an issue when zooming with open menu on Firefox
+#page-content-wrapper {
+  & > .container {
+    max-width: 100%
+  }
 }
 
 /* Sidebar Styles */
