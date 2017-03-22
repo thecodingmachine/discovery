@@ -1,6 +1,8 @@
 Discovery
 =========
 
+Publish and discover assets in your PHP projects
+
 [![Latest Stable Version](https://poser.pugx.org/thecodingmachine/discovery/v/stable)](https://packagist.org/packages/thecodingmachine/discovery)
 [![Total Downloads](https://poser.pugx.org/thecodingmachine/discovery/downloads)](https://packagist.org/packages/thecodingmachine/discovery)
 [![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/discovery/v/unstable)](https://packagist.org/packages/thecodingmachine/discovery)
@@ -9,9 +11,7 @@ Discovery
 [![Build Status](https://travis-ci.org/thecodingmachine/discovery.svg?branch=1.1)](https://travis-ci.org/thecodingmachine/discovery)
 [![Coverage Status](https://coveralls.io/repos/thecodingmachine/discovery/badge.svg?branch=1.1&service=github)](https://coveralls.io/github/thecodingmachine/discovery?branch=1.1)
 
-Publish and discover assets in your PHP projects
-
-This package helps you find "static" assets in your Composer packages.
+This package is designed for *framework developers* and *package developers*. It helps you find "static" assets in your Composer packages.
 
 What problem does this solve?
 -----------------------------
@@ -47,8 +47,17 @@ Look at the way most frameworks handle the installation of bundles/modules:
 
 This second step is completely useless. If a developer adds a Composer dependency, it is almost always to use it. It would be great if the framework could easily explore composer packages and find modules/bundles or service providers by itself.
 
-Discovery allows this.
+Discovery allows this:
 
+```php
+use TheCodingMachine\Discovery;
+
+$assets = Discovery::getInstance()->get('my_framework_modules');
+
+// This would scan all discovery.json files and returns an array of class names.
+```
+
+In the example above, `my_framework_modules` is the "asset type". It represents a kind of static assets (in this case, the class name of a framework module).
 
 discovery.json format
 -----------------------
@@ -57,26 +66,23 @@ In packages *publishing* assets, put a `discovery.json` with the following forma
 
 ```json
 {
-    "some_asset_type": [
-        "some_value",
-        "another_value"
+    "my_framework_modules": [
+        "My\Module\ClassName",
+        "My\OtherModule\ClassName"
     ]
 }
 ```
 
-In the example above, `some_asset_type` is an *asset type*. You will query on that identifier in your PHP code.
-
 Want to view the full syntax of `discovery.json`? Check out [the discovery.json schema document](doc/discovery_schema.md)
 
-Discovering assets
-------------------
+Also, an asset type can be really anything, it does not have to be a class name. For instance, you could decide to publish some translation files:
 
-From your project, simply run:
-
-```php
-$assets = TheCodingMachine\Discovery::getInstance()->get('some_asset_type');
-
-// This will scan all discovery.json files and returns an array of values.
+```json
+{
+    "translations": [
+        "translations/translation.po"
+    ]
+}
 ```
 
 Install
