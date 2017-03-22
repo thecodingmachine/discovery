@@ -1,11 +1,12 @@
 ---
 title: Publish and discover assets in your PHP projects
+hidetitle: true
 currentMenu: discovery-introduction
 ---
 Discovery
 =========
 
-Publish and discover assets in your PHP projects
+Publish and discover assets in your PHP projects.
 
 [![Latest Stable Version](https://poser.pugx.org/thecodingmachine/discovery/v/stable)](https://packagist.org/packages/thecodingmachine/discovery)
 [![Total Downloads](https://poser.pugx.org/thecodingmachine/discovery/downloads)](https://packagist.org/packages/thecodingmachine/discovery)
