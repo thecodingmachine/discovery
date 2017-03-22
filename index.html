@@ -223,6 +223,7 @@
             <div class="row">
                 <div class="col-xs-12">
                                         <h1 id="discovery">Discovery</h1>
+<p>Publish and discover assets in your PHP projects</p>
 <p><a href="https://packagist.org/packages/thecodingmachine/discovery"><img src="https://poser.pugx.org/thecodingmachine/discovery/v/stable" alt="Latest Stable Version" /></a>
 <a href="https://packagist.org/packages/thecodingmachine/discovery"><img src="https://poser.pugx.org/thecodingmachine/discovery/downloads" alt="Total Downloads" /></a>
 <a href="https://packagist.org/packages/thecodingmachine/discovery"><img src="https://poser.pugx.org/thecodingmachine/discovery/v/unstable" alt="Latest Unstable Version" /></a>
@@ -230,8 +231,7 @@
 <a href="https://scrutinizer-ci.com/g/thecodingmachine/discovery/?branch=1.1"><img src="https://scrutinizer-ci.com/g/thecodingmachine/discovery/badges/quality-score.png?b=1.1" alt="Scrutinizer Code Quality" /></a>
 <a href="https://travis-ci.org/thecodingmachine/discovery"><img src="https://travis-ci.org/thecodingmachine/discovery.svg?branch=1.1" alt="Build Status" /></a>
 <a href="https://coveralls.io/github/thecodingmachine/discovery?branch=1.1"><img src="https://coveralls.io/repos/thecodingmachine/discovery/badge.svg?branch=1.1&amp;service=github" alt="Coverage Status" /></a></p>
-<p>Publish and discover assets in your PHP projects</p>
-<p>This package helps you find &quot;static&quot; assets in your Composer packages.</p>
+<p>This package is designed for <em>framework developers</em> and <em>package developers</em>. It helps you find &quot;static&quot; assets in your Composer packages.</p>
 <h2 id="what-problem-does-this-solve">What problem does this solve?</h2>
 <p>For your project, you are looking to search through all the installed packages for some kind of resource. It could be:</p>
 <ul>
@@ -257,22 +257,28 @@
 <li>then you need to register the class of the module/bundle/service provider in your project</li>
 </ol>
 <p>This second step is completely useless. If a developer adds a Composer dependency, it is almost always to use it. It would be great if the framework could easily explore composer packages and find modules/bundles or service providers by itself.</p>
-<p>Discovery allows this.</p>
+<p>Discovery allows this:</p>
+<pre><code class="language-php">use TheCodingMachine\Discovery;
+
+$assets = Discovery::getInstance()-&gt;get('my_framework_modules');
+
+// This would scan all discovery.json files and returns an array of class names.</code></pre>
+<p>In the example above, <code>my_framework_modules</code> is the &quot;asset type&quot;. It represents a kind of static assets (in this case, the class name of a framework module).</p>
 <h2 id="discoveryjson-format">discovery.json format</h2>
 <p>In packages <em>publishing</em> assets, put a <code>discovery.json</code> with the following format:</p>
 <pre><code class="language-json">{
-    "some_asset_type": [
-        "some_value",
-        "another_value"
+    "my_framework_modules": [
+        "My\Module\ClassName",
+        "My\OtherModule\ClassName"
     ]
 }</code></pre>
-<p>In the example above, <code>some_asset_type</code> is an <em>asset type</em>. You will query on that identifier in your PHP code.</p>
 <p>Want to view the full syntax of <code>discovery.json</code>? Check out <a href="doc/discovery_schema.html">the discovery.json schema document</a></p>
-<h2 id="discovering-assets">Discovering assets</h2>
-<p>From your project, simply run:</p>
-<pre><code class="language-php">$assets = TheCodingMachine\Discovery::getInstance()-&gt;get('some_asset_type');
-
-// This will scan all discovery.json files and returns an array of values.</code></pre>
+<p>Also, an asset type can be really anything, it does not have to be a class name. For instance, you could decide to publish some translation files:</p>
+<pre><code class="language-json">{
+    "translations": [
+        "translations/translation.po"
+    ]
+}</code></pre>
 <h2 id="install">Install</h2>
 <p>Simply run:</p>
 <pre><code class="language-sh">composer require thecodingmachine/discovery</code></pre>
