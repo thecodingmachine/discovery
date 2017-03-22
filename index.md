@@ -1,3 +1,7 @@
+---
+title: Publish and discover assets in your PHP projects
+currentMenu: discovery-introduction
+---
 Discovery
 =========
 
