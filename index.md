@@ -67,8 +67,8 @@ In packages *publishing* assets, put a `discovery.json` with the following forma
 ```json
 {
     "my_framework_modules": [
-        "My\Module\ClassName",
-        "My\OtherModule\ClassName"
+        "My\\Module\\ClassName",
+        "My\\OtherModule\\ClassName"
     ]
 }
 ```
