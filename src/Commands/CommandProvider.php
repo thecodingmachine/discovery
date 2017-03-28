@@ -21,6 +21,7 @@ class CommandProvider implements CommandProviderCapability
         return [
             new ListAssetTypesCommand(),
             new DumpCommand(),
+            new AddAssetCommand(),
         ];
     }
 }

@@ -124,7 +124,7 @@ class Asset implements \JsonSerializable
             $item['priority'] = $this->getPriority();
         }
 
-        if ($this->getMetadata() !== null) {
+        if (!empty($this->getMetadata())) {
             $item['metadata'] = $this->getMetadata();
         }
 
