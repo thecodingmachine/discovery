@@ -69,4 +69,20 @@ class AssetOperationTest extends \PHPUnit_Framework_TestCase
         $this->expectException(InvalidArgumentException::class);
         new AssetOperation('boom', new Asset("value", "package", "packagedir", 0, []));
     }
+
+    public function testToSimpleArray()
+    {
+        $asset = new Asset('foo', 'package/a', 'vendor/package/a', 0.0, null);
+        $assetOperation = new AssetOperation(AssetOperation::REMOVE, $asset);
+
+        $this->assertSame([
+            'value' => 'foo',
+            'action' => 'remove'
+        ], $assetOperation->toSimpleArray());
+
+        $asset = new Asset('foo', 'package/a', 'vendor/package/a', 0.0, null);
+        $assetOperation = new AssetOperation(AssetOperation::ADD, $asset);
+
+        $this->assertSame('foo', $assetOperation->toSimpleArray());
+    }
 }

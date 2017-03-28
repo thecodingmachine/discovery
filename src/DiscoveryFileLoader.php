@@ -94,4 +94,37 @@ class DiscoveryFileLoader
             return AssetOperation::buildFromString((string) $value, $package, $packageDir);
         }
     }
+
+    /**
+     * Saves the list of asset operations into a file.
+     *
+     * @param AssetOperation[][] $assetOperationTypes
+     * @param \SplFileObject $file
+     */
+    public function saveDiscoveryFile(array $assetOperationTypes, \SplFileObject $file)
+    {
+        $simpleAssetOperationTypes = [];
+        foreach ($assetOperationTypes as $assetType => $assetOperations) {
+            $simpleAssetOperationTypes[$assetType] = $this->simplify($assetOperations);
+        }
+
+        $file->fwrite(json_encode($simpleAssetOperationTypes, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * @param AssetOperation[] $assetOperations
+     * @return array|string
+     */
+    private function simplify(array $assetOperations)
+    {
+        $simplifiedAssetOperations = array_map(function(AssetOperation $assetOperation) {
+            return $assetOperation->toSimpleArray();
+        }, $assetOperations);
+
+        if (count($simplifiedAssetOperations) === 1) {
+            return array_values($simplifiedAssetOperations)[0];
+        } else {
+            return $simplifiedAssetOperations;
+        }
+    }
 }

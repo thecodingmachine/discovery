@@ -16,6 +16,7 @@ use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Symfony\Component\Filesystem\Filesystem;
 use TheCodingMachine\Discovery\Commands\CommandProvider as DiscoveryCommandProvider;
+use TheCodingMachine\Discovery\Commands\DumpCommand;
 
 class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface, Capable
 {
@@ -44,16 +45,6 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface, Capa
         ];
     }
 
-    /**
-     * @return AssetsBuilder
-     */
-    private function getAssetsBuilder() : AssetsBuilder
-    {
-        $installationManager = $this->composer->getInstallationManager();
-        $rootDir = dirname(Factory::getComposerFile());
-        return new AssetsBuilder($installationManager, $this->io, $rootDir);
-    }
-
     public function beforeDumpAutoload(Event $event)
     {
         // Plugin has been uninstalled
@@ -61,29 +52,8 @@ class DiscoveryPlugin implements PluginInterface, EventSubscriberInterface, Capa
             return;
         }
 
-        $fileSystem = new Filesystem();
-
-        $localRepos = $this->composer->getRepositoryManager()->getLocalRepository();
-        $assetTypes = $this->getAssetsBuilder()->findAssetTypes($localRepos);
-
-        // Let's get an array of values, indexed by asset type (to store in the discovery_values.php file)
-        $values = array_map(function (AssetType $assetType) {
-            return $assetType->getValues();
-        }, $assetTypes);
-
-        $fileSystem->dumpFile('.discovery/discovery_values.php', '<?php
-return '.var_export($values, true).";\n");
-
-        // Let's get an array of assetTypes, indexed by asset type (to store in the discovery_asset_types.php file)
-        $assetTypes = array_map(function (AssetType $assetType) {
-            return $assetType->jsonSerialize();
-        }, $assetTypes);
-
-        $fileSystem->dumpFile('.discovery/discovery_asset_types.php', '<?php
-return '.var_export($assetTypes, true).";\n");
-
-        // Let's copy the Discovery class in the .discovery directory. This is needed because otherwise, we have no way to "find" the .discovery directory easily.
-        $fileSystem->dumpFile('.discovery/Discovery.php', file_get_contents(__DIR__.'/Discovery.php.tpl'));
+        $dumper = new Dumper($this->composer, $this->io);
+        $dumper->dumpDiscoveryFiles();
 
         $this->registerClassInAutoloader();
     }

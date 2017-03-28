@@ -108,4 +108,30 @@ class Asset implements \JsonSerializable
     {
         return new self($array['value'], $array['package'], $array['packageDir'], $array['priority'], $array['metadata']);
     }
+
+    /**
+     * Returns a simplified array representing the object.
+     *
+     * @return array|string
+     */
+    public function toSimpleArray()
+    {
+        $item = [
+            'value' => $this->getValue(),
+        ];
+
+        if ($this->getPriority() !== 0.0) {
+            $item['priority'] = $this->getPriority();
+        }
+
+        if ($this->getMetadata() !== null) {
+            $item['metadata'] = $this->getMetadata();
+        }
+
+        if (count($item) === 1) {
+            return $item['value'];
+        } else {
+            return $item;
+        }
+    }
 }

@@ -4,11 +4,16 @@
 namespace TheCodingMachine\Discovery;
 
 
+use Composer\Command\BaseCommand;
 use Composer\Composer;
 use Composer\Installer\InstallationManager;
+use Composer\IO\IOInterface;
 use Composer\Package\Package;
 use Composer\Repository\RepositoryInterface;
 use Composer\Repository\RepositoryManager;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
+use TheCodingMachine\Discovery\Commands\ListAssetTypesCommand;
 
 abstract class AbstractDiscoveryTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,4 +54,34 @@ abstract class AbstractDiscoveryTest extends \PHPUnit_Framework_TestCase
 
         return $composer;
     }
+
+    protected function getIO() : IOInterface
+    {
+        $io = $this->createMock(IOInterface::class);
+        $io->method('writeError');
+
+        return $io;
+    }
+
+    /**
+     * Calls the command passed in parameter. Returns the output.
+     *
+     * @param BaseCommand $command
+     * @param InputInterface $input
+     * @return string
+     */
+    protected function callCommand(BaseCommand $command, InputInterface $input) : string
+    {
+        $command->setComposer($this->getComposer());
+        $command->setIO($this->getIO());
+
+        $output = new BufferedOutput();
+
+        $r = new \ReflectionMethod($command, 'execute');
+        $r->setAccessible(true);
+        $r->invoke($command, $input, $output);
+
+        return $output->fetch();
+    }
+
 }

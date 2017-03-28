@@ -25,25 +25,11 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
         ]);
     }
 
-    private function callCommand(InputInterface $input) : string
-    {
-        $listAssetTypesCommand = new ListAssetTypesCommand();
-        $listAssetTypesCommand->setComposer($this->getComposer());
-
-        $output = new BufferedOutput();
-
-        $r = new \ReflectionMethod(ListAssetTypesCommand::class, 'execute');
-        $r->setAccessible(true);
-        $r->invoke($listAssetTypesCommand, $input, $output);
-
-        return $output->fetch();
-    }
-
     public function testEmptyCall()
     {
         $input = new ArrayInput([], $this->getInputDefinition());
 
-        $result = $this->callCommand($input);
+        $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
         $this->assertContains('test-asset:', $result);
         $this->assertContains('a1', $result);
@@ -54,7 +40,7 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
     {
         $input = new ArrayInput(['asset-type'=>'test-asset'], $this->getInputDefinition());
 
-        $result = $this->callCommand($input);
+        $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
         $this->assertContains('test-asset:', $result);
         $this->assertContains('a1', $result);
@@ -65,7 +51,7 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
     {
         $input = new ArrayInput(['asset-type'=>'test-asset', '--format'=>'json'], $this->getInputDefinition());
 
-        $result = $this->callCommand($input);
+        $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
         $this->assertJson($result);
     }
@@ -75,7 +61,7 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
     {
         $input = new ArrayInput(['asset-type'=>'toto'], $this->getInputDefinition());
 
-        $result = $this->callCommand($input);
+        $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
         $this->assertContains('Could not find the "toto" asset type.', $result);
     }
