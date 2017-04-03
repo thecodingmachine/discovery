@@ -4,16 +4,13 @@
 namespace TheCodingMachine\Discovery\Commands;
 
 
-use Composer\Command\BaseCommand;
-use Composer\Factory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use TheCodingMachine\Discovery\AssetsBuilder;
 use TheCodingMachine\Discovery\AssetType;
 
-class ListAssetTypesCommand extends BaseCommand
+class ListAssetTypesCommand extends AbstractDiscoveryCommand
 {
     protected function configure()
     {
@@ -71,15 +68,5 @@ class ListAssetTypesCommand extends BaseCommand
                 }
             }
         }
-    }
-
-    protected function getAssetTypes() : array
-    {
-        $installationManager = $this->getComposer()->getInstallationManager();
-        $rootDir = dirname(Factory::getComposerFile());
-        $assetBuilder = new AssetsBuilder($installationManager, $this->getIO(), $rootDir);
-
-        $localRepos = $this->getComposer()->getRepositoryManager()->getLocalRepository();
-        return $assetBuilder->findAssetTypes($localRepos);
     }
 }

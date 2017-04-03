@@ -17,7 +17,7 @@ use TheCodingMachine\Discovery\AbstractDiscoveryTest;
 
 class AddAssetCommandTest extends AbstractDiscoveryTest
 {
-    private function getInputDefinition()
+    public static function getInputDefinition()
     {
         return new InputDefinition([
             new InputArgument('asset-type', InputArgument::REQUIRED),
@@ -35,7 +35,7 @@ class AddAssetCommandTest extends AbstractDiscoveryTest
         $input = new ArrayInput([
             'asset-type' => 'foo',
             'value' => 'bar'
-        ], $this->getInputDefinition());
+        ], self::getInputDefinition());
 
         $result = $this->callCommand(new AddAssetCommand(), $input);
 
@@ -55,7 +55,7 @@ class AddAssetCommandTest extends AbstractDiscoveryTest
             'asset-type' => 'foo',
             'value' => 'bar',
             '--priority' => 'a'
-        ], $this->getInputDefinition());
+        ], self::getInputDefinition());
 
         $result = $this->callCommand(new AddAssetCommand(), $input);
 

@@ -41,7 +41,7 @@ class AssetsBuilder
      * Find discovery.json files in the passed repository and builds an asset type.
      *
      * @param RepositoryInterface $repository
-     * @return array
+     * @return AssetType[]
      */
     public function findAssetTypes(RepositoryInterface $repository) : array
     {
