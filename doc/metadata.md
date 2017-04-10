@@ -12,7 +12,7 @@ Assets are represented by **strings**. Yet, if you need to pass more complex obj
     "some_asset_type": [
         {
             "value": "some_value",
-            "meta": {
+            "metadata": {
                 "some": "metadata",
                 "more": "metadata"
             }

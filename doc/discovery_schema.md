@@ -11,7 +11,7 @@ currentMenu: schema
     "some_asset_type": [
         {
             "value": "some_value",
-            "meta": {
+            "metadata": {
                 "some": "metadata",
                 "more": "metadata"
             },
@@ -33,7 +33,7 @@ Each asset object can be represented this way:
 ```json
 {
     "value": "some_value",
-    "meta": {
+    "metadata": {
         "some": "metadata",
         "more": "metadata"
     },
