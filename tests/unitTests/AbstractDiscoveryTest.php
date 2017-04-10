@@ -9,6 +9,7 @@ use Composer\Composer;
 use Composer\Installer\InstallationManager;
 use Composer\IO\IOInterface;
 use Composer\Package\Package;
+use Composer\Package\RootPackage;
 use Composer\Repository\RepositoryInterface;
 use Composer\Repository\RepositoryManager;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,6 +52,7 @@ abstract class AbstractDiscoveryTest extends \PHPUnit_Framework_TestCase
         $composer = new Composer();
         $composer->setInstallationManager($this->getInstallationManagerMock());
         $composer->setRepositoryManager($this->getRepositoryManagerMock());
+        $composer->setPackage(new RootPackage('__root__', 'stable', '1.0'));
 
         return $composer;
     }

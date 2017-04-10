@@ -6,6 +6,8 @@ namespace TheCodingMachine\Discovery;
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
+use Composer\Repository\CompositeRepository;
+use Composer\Repository\InstalledArrayRepository;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -33,7 +35,12 @@ class Dumper
         $fileSystem = new Filesystem();
 
         $localRepos = $this->composer->getRepositoryManager()->getLocalRepository();
-        $assetTypes = $this->getAssetsBuilder()->findAssetTypes($localRepos);
+        $repos = array(
+            $localRepos,
+            new InstalledArrayRepository([clone $this->composer->getPackage()]),
+        );
+        $compositeRepos = new CompositeRepository($repos);
+        $assetTypes = $this->getAssetsBuilder()->findAssetTypes($compositeRepos);
 
         // Let's get an array of values, indexed by asset type (to store in the discovery_values.php file)
         $values = array_map(function (AssetType $assetType) {

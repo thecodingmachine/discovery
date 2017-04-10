@@ -46,4 +46,12 @@ class DiscoveryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame([], $result->getAssets());
     }
+
+    public function testLocalDiscoveryJsonDetection()
+    {
+        $result = Discovery::getInstance()->getAssetType('local');
+
+        $this->assertSame('local', $result->getAssets()[0]->getValue());
+    }
+
 }
