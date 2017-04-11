@@ -101,4 +101,21 @@ class AssetOperation
 
         return new self(self::ADD, new Asset($value, $package, $packageDir, $priority, $metadata));
     }
+
+    /**
+     * Returns a simplified array/string representing this asset operation.
+     *
+     * @return array|string
+     */
+    public function toSimpleArray()
+    {
+        $simple = $this->asset->toSimpleArray();
+        if ($this->operation === self::REMOVE) {
+            if (is_string($simple)) {
+                $simple = [ 'value' => $simple ];
+            }
+            $simple['action'] = self::REMOVE;
+        }
+        return $simple;
+    }
 }

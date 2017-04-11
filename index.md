@@ -6,7 +6,7 @@ currentMenu: discovery-introduction
 Discovery
 =========
 
-Publish and discover assets in your PHP projects
+Publish and discover assets in your PHP projects.
 
 [![Latest Stable Version](https://poser.pugx.org/thecodingmachine/discovery/v/stable)](https://packagist.org/packages/thecodingmachine/discovery)
 [![Total Downloads](https://poser.pugx.org/thecodingmachine/discovery/downloads)](https://packagist.org/packages/thecodingmachine/discovery)
@@ -115,13 +115,18 @@ More documentation
         <a href="doc/order.html" class="btn btn-primary btn-large btn-block">Managing assets order</a>
     </div>
     <div class="col-xs-12 col-sm-6">
-        <a href="doc/conventions.html" class="btn btn-primary btn-large btn-block">Naming conventions</a>
+        <a href="doc/cli.html" class="btn btn-primary btn-large btn-block">Command line interface</a>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
+        <a href="doc/conventions.html" class="btn btn-primary btn-large btn-block">Naming conventions</a>
+    </div>
+    <div class="col-xs-12 col-sm-6">
         <a href="doc/internals.html" class="btn btn-primary btn-large btn-block">Internals and performance</a>
     </div>
+</div>
+<div class="row">
     <div class="col-xs-12 col-sm-6">
         <a href="doc/discovery_schema.html" class="btn btn-primary btn-large btn-block">discovery.json schema</a>
     </div>

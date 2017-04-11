@@ -71,4 +71,53 @@ class DiscoveryFileLoaderTest extends \PHPUnit_Framework_TestCase
         $this->expectException(IOException::class);
         $loader->loadDiscoveryFile(new \SplFileInfo(__DIR__.'/../fixtures/notexist.json'), 'fixture/package_a', 'vendor/fixture/package_a');
     }
+
+    public function testSaveDiscoveryFileWithOneAsset()
+    {
+        $loader = new DiscoveryFileLoader();
+
+        $asset = new Asset('foo', 'package/a', 'vendor/package/a', 0.0, null);
+        $assetOperation = new AssetOperation(AssetOperation::ADD, $asset);
+
+        $assetOperationTypes = [
+            'bar' => [
+                $assetOperation
+            ]
+        ];
+
+        $file = new \SplFileObject('php://temp', 'w+');
+
+        $loader->saveDiscoveryFile($assetOperationTypes, $file);
+        $file->rewind();
+        $json = $file->fread(4096);
+
+        $data = json_decode($json, true);
+
+        $this->assertSame(['bar'=>'foo'], $data);
+    }
+
+    public function testSaveDiscoveryFileWithTwoAsset()
+    {
+        $loader = new DiscoveryFileLoader();
+
+        $asset = new Asset('foo', 'package/a', 'vendor/package/a', 0.0, null);
+        $assetOperation = new AssetOperation(AssetOperation::ADD, $asset);
+
+        $assetOperationTypes = [
+            'bar' => [
+                $assetOperation,
+                $assetOperation
+            ]
+        ];
+
+        $file = new \SplFileObject('php://temp', 'w+');
+
+        $loader->saveDiscoveryFile($assetOperationTypes, $file);
+        $file->rewind();
+        $json = $file->fread(4096);
+
+        $data = json_decode($json, true);
+
+        $this->assertSame(['bar'=>['foo', 'foo']], $data);
+    }
 }

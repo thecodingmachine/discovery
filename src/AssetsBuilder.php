@@ -6,6 +6,8 @@ namespace TheCodingMachine\Discovery;
 use Composer\Installer\InstallationManager;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Composer\Package\RootPackageInterface;
+use Composer\Repository\RepositoryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
@@ -36,6 +38,27 @@ class AssetsBuilder
         $this->rootDir = $rootDir;
     }
 
+    /**
+     * Find discovery.json files in the passed repository and builds an asset type.
+     *
+     * @param RepositoryInterface $repository
+     * @param RootPackageInterface $rootPackage
+     * @return array|AssetType[]
+     */
+    public function findAssetTypes(RepositoryInterface $repository) : array
+    {
+        $unorderedPackagesList = $repository->getPackages();
+
+        $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
+
+        $packages = array_filter($orderedPackageList, function (PackageInterface $package) {
+            $packageInstallPath = $this->getInstallPath($package);
+
+            return file_exists($packageInstallPath.'/discovery.json');
+        });
+
+        return $this->buildAssetTypes($packages);
+    }
 
     /**
      * Builds the AssetTypes that will be exported in the generated TheCodingMachine\Discovery class.
@@ -80,7 +103,7 @@ class AssetsBuilder
      */
     private function getDiscoveryJson(PackageInterface $package) : array
     {
-        $packageInstallPath = $this->installationManager->getInstallPath($package);
+        $packageInstallPath = $this->getInstallPath($package);
 
         $fileSystem = new Filesystem();
 
@@ -91,5 +114,14 @@ class AssetsBuilder
         $discoveryFileLoader = new DiscoveryFileLoader();
 
         return $discoveryFileLoader->loadDiscoveryFile(new \SplFileInfo($path), $package->getName(), $packageDir);
+    }
+
+    private function getInstallPath(PackageInterface $package) : string
+    {
+        if ($package instanceof RootPackageInterface) {
+            return getcwd();
+        } else {
+            return $this->installationManager->getInstallPath($package);
+        }
     }
 }

@@ -6,17 +6,13 @@ namespace TheCodingMachine\Discovery;
 use Composer\Installer\InstallationManager;
 use Composer\IO\BufferIO;
 use Composer\Package\Package;
+use Composer\Repository\RepositoryInterface;
 
-class AssetsBuilderTest extends \PHPUnit_Framework_TestCase
+class AssetsBuilderTest extends AbstractDiscoveryTest
 {
     public function testAssetBuilder()
     {
-        // Create a stub for the SomeClass class.
-        $installationManager = $this->createMock(InstallationManager::class);
-
-        // Configure the stub.
-        $installationManager->method('getInstallPath')
-            ->willReturn('tests/fixtures/package_a');
+        $installationManager = $this->getInstallationManagerMock();
 
         $packageA = new Package('package/a', '1.0.0', '1.0.0');
 
@@ -32,12 +28,7 @@ class AssetsBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testAssetBuilderErrorHandling()
     {
-        // Create a stub for the SomeClass class.
-        $installationManager = $this->createMock(InstallationManager::class);
-
-        // Configure the stub.
-        $installationManager->method('getInstallPath')
-            ->willReturn('tests/fixtures/package_error');
+        $installationManager = $this->getInstallationManagerMock('tests/fixtures/package_error');
 
         $packageA = new Package('package/a', '1.0.0', '1.0.0');
 
@@ -48,5 +39,22 @@ class AssetsBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $assetTypes);
         $this->assertNotEmpty($io->getOutput());
+    }
+
+    public function testFindAssetTypes()
+    {
+
+        $installationManager = $this->getInstallationManagerMock();
+
+
+        $io = new BufferIO();
+
+        $assetsBuilder = new AssetsBuilder($installationManager, $io, '.');
+
+        $repository = $this->getRepositoryMock();
+
+        $assetTypes = $assetsBuilder->findAssetTypes($repository);
+
+        $this->assertCount(1, $assetTypes);
     }
 }
