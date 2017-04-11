@@ -5,7 +5,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Running unit tests | Discovery</title>
+    <title>Command line interface | Discovery</title>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -114,7 +114,7 @@
                                 Managing assets order
                             </a>
                         </li>
-                                                                                <li class=" visible-xs-block">
+                                                                                <li class="active visible-xs-block">
                             <a href="https://thecodingmachine.github.io/discovery/doc/cli.html">
                                 Command line interface
                             </a>
@@ -134,7 +134,7 @@
                                 Internals and performance
                             </a>
                         </li>
-                                                                                <li class="active visible-xs-block">
+                                                                                <li class=" visible-xs-block">
                             <a href="https://thecodingmachine.github.io/discovery/doc/unit_tests.html">
                                 Running unit tests
                             </a>
@@ -182,7 +182,7 @@
                             Managing assets order
                         </a>
                     </li>
-                                                                <li class="">
+                                                                <li class="active">
                         <a href="https://thecodingmachine.github.io/discovery/doc/cli.html">
                             Command line interface
                         </a>
@@ -205,7 +205,7 @@
                             Internals and performance
                         </a>
                     </li>
-                                                                <li class="active">
+                                                                <li class="">
                         <a href="https://thecodingmachine.github.io/discovery/doc/unit_tests.html">
                             Running unit tests
                         </a>
@@ -232,21 +232,48 @@
         <div class="container pt100">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Running unit tests <small></small></h1>                    <p>Unit/integration tests are run in 2 steps.</p>
-<h2 id="running-integration-tests">Running integration tests</h2>
-<p>First step: execute the plugin in Composer</p>
-<pre><code>cd tests/
-./run.sh</code></pre>
-<p>This will run the <strong>integration</strong> tests (i.e. this will run the Composer plugin for real, inside Composer)</p>
-<h2 id="running-unit-tests">Running unit tests</h2>
-<p>Second step: run unit tests</p>
-<pre><code>cd ..
-vendor/bin/phpunit</code></pre>
-<p>Note: you must run the integration tests <strong>before</strong> the unit tests. Indeed, the integration tests are generating PHP files and classes that will be later tested by the unit tests.</p>
+                    <h1>Command line interface <small></small></h1>                    <p>Discovery comes with a CLI (command line interface).</p>
+<p>You can use the CLI commands to:</p>
+<ul>
+<li>debug what is happening</li>
+<li>modify your local <code>discovery.json</code></li>
+<li>hook third party tools (like Gulp or Webpack)</li>
+</ul>
+<p>Actually, <em>discovery</em> is adding a set of commands to composer.</p>
+<h2 id="listing-asset-types">Listing asset types</h2>
+<pre><code class="language-bash">$ composer discovery:list</code></pre>
+<p>will output the list of asset types and the list of assets in each asset-type:</p>
+<pre><code>my-asset-type-1:
+  assetA
+  assetB
+  assetC
+my-asset-type-2:
+  assetD</code></pre>
+<p>You can also ask for the assets of a given asset-type:</p>
+<pre><code class="language-bash">$ composer discovery:list my-asset-type-2</code></pre>
+<p>will output:</p>
+<pre><code>my-asset-type-2:
+  assetD</code></pre>
+<p>Finally, if you need more data, you can use the JSON output (maybe you want to output the metadata associated to each asset or you want to integrate the output with a third party tool).</p>
+<pre><code class="language-bash">$ composer discovery:list --format=json</code></pre>
+<h2 id="dumping-the-discovery-files">Dumping the Discovery files</h2>
+<p>Discovery is &quot;dumping&quot; a set of files that enable extremely quick access to the assets. <strong>If you change manually a <code>discovery.json</code> file in your project, you will need to regenerate those files.</strong> You can do this with the <code>discovery:dump</code> command:</p>
+<pre><code class="language-bash">$ composer discovery:dump</code></pre>
+<h2 id="adding-an-asset">Adding an asset</h2>
+<p>You can add an asset to an asset type using the <code>discovery:add</code> command:</p>
+<pre><code class="language-bash">$ composer discovery:add "my-asset-type" "my-asset-value"</code></pre>
+<p>The asset is added to the <code>discovery.json</code> file at the root of your project.</p>
+<p>You can also set the priority while adding an asset:</p>
+<pre><code class="language-bash">$ composer discovery:add "my-asset-type" "my-asset-value" --priority=42</code></pre>
+<p>Note: currently, discovery does not support adding metadata via the command line. You will need to edit the <code>discovery.json</code> file manually to add metadata to an asset.</p>
+<h2 id="removing-an-asset">Removing an asset</h2>
+<p>You can remove an asset from a project using the <code>discovery:remove</code> command:</p>
+<pre><code class="language-bash">$ composer discovery:remove "my-asset-type" "my-asset-value"</code></pre>
+<p>The asset is removed from the <code>discovery.json</code> file at the root of your project or a &quot;remove&quot; action is added in the <code>discovery.json</code> file at the root of your project (if the asset is defined in a dependency).</p>
 
                     <p class="fork-and-edit">
                         Found a typo? Something is wrong in this documentation? Just
-                        <a href="https://github.com/thecodingmachine/discovery/blob/1.1/doc/unit_tests.md">fork and edit it</a>!
+                        <a href="https://github.com/thecodingmachine/discovery/blob/1.1/doc/cli.md">fork and edit it</a>!
                     </p>
                 </div>
             </div>
