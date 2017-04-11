@@ -43,6 +43,9 @@ menu:
         order:
             text: Managing assets order
             relativeUrl: doc/order.html
+        cli:
+            text: Command line interface
+            relativeUrl: doc/cli.html
         schema:
             text: discovery.json format
             relativeUrl: doc/discovery_schema.html
