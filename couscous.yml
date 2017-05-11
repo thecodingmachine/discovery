@@ -22,6 +22,8 @@ icon:
 body:
             bg: doc/img/bg.jpg
 
+google_analytics: UA-10196481-3
+
 githubForkUrl: https://github.com/thecodingmachine/discovery/blob/1.1/
 githubUrl: https://github.com/thecodingmachine/discovery
 
