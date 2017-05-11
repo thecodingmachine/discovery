@@ -1,3 +1,5 @@
+__webpack_public_path__ = window.resourceBaseUrl;
+
 require("./less/style.less");
 require("./node_modules/highlight.js/styles/tomorrow-night-bright.css");
 

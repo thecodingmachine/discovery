@@ -1,12 +1,14 @@
 let libraryName = "TCM-couscous-theme";
 let path = require("path");
 let webpack = require("webpack");
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: path.resolve(__dirname, './app.js'),
     output: {
         path: './build/',
         filename: 'app.bundle.js',
+        publicPath: ''
         //library: libraryName,
         //libraryTarget: 'umd',
         //umdNamedDefine: true
@@ -14,35 +16,30 @@ module.exports = {
     devtool: 'source-map',
     module: {
         loaders: [
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
-            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+            { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback:'style-loader', use:'css-loader'}) },
+            { test: /\.less$/, loader: ExtractTextPlugin.extract({ fallback:'style-loader', use:'css-loader!less-loader'}) },
             { test: /\.png$/, loader: "url-loader?limit=100000",
                 query: {
-                    name: 'images/[name].[ext]',
-                    publicPath: './build/'
+                    name: 'images/[name].[ext]'
                 }},
             { test: /\.jpg$/, loader: "file-loader",
                 query: {
-                    name: 'images/[name].[ext]',
-                    publicPath: './build/'
+                    name: 'images/[name].[ext]'
                 }},
             { test: /\.gif$/, loader: "file-loader",
                 query: {
-                    name: 'images/[name].[ext]',
-                    publicPath: './build/'
+                    name: 'images/[name].[ext]'
                 }},
             { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader",
                 query: {
                     limit: 10000,
                     mimetype: 'application/font-woff',
-                    name: 'fonts/[name].[ext]',
-                    publicPath: './build/'
+                    name: 'fonts/[name].[ext]'
                 }},
             { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader",
                 query: {
                     limit: 10000,
-                    name: 'fonts/[name].[ext]',
-                    publicPath: './build/'
+                    name: 'fonts/[name].[ext]'
                 }},
 
             /*{ test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url-loader?limit=10000' },*/
@@ -55,14 +52,14 @@ module.exports = {
         new webpack.ContextReplacementPlugin(
             /highlight\.js\/lib\/languages$/,
             new RegExp(`^./(${['javascript', 'php', 'bash', 'sql', 'css', 'less', 'json'].join('|')})$`)
-)
+        ),
         /*new webpack.ProvidePlugin({
             hljs: "jquery",
             jQuery: "jquery"
         })*/
         //new webpack.optimize.CommonsChunkPlugin("init.js"),
         // Extracts the CSS in CSS files (otherwise it would be bundled in the JS!)
-        //new ExtractTextPlugin("[name].css")
+        new ExtractTextPlugin("[name].css")
     ],
     resolve: {
         alias: {

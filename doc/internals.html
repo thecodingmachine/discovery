@@ -34,10 +34,16 @@
     <meta name="msapplication-TileColor" content="#f01d4f">
     <meta name="msapplication-TileImage" content="//www.thecodingmachine.com/wp-content/themes/thecodingmachine/library/images/win8-tile-icon.png">
 
+    <script>
+        window.resourceBaseUrl = 'https://thecodingmachine.github.io/discovery';
+    </script>
+
     <style>
         /** quick fix because bootstrap <pre> has a background-color. */
         pre code { background-color: inherit; }
     </style>
+
+    <link rel="stylesheet" type="text/css" href="https://thecodingmachine.github.io/discovery/build/main.css">
                 
 
     <link rel='stylesheet' id='font-awesome-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' type='text/css' media='all' />
@@ -66,16 +72,6 @@
     </script>
 </head>
 <body class="">
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3&appId=1549118041971618";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
