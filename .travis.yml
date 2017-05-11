@@ -1,27 +1,23 @@
 language: php
-
 php:
- - 7.0
- - 7.1
-
+- 7.0
+- 7.1
 before_script:
- - composer self-update
- - composer clear-cache
- - composer update
-
+- composer self-update
+- composer clear-cache
+- composer update
 env:
   global:
-   - GIT_NAME: "'Couscous auto deploy'"
-   - GIT_EMAIL: d.negrier@thecodingmachine.com
-   - GH_REF: github.com/thecodingmachine/discovery
-   - secure: gIB5NdbKzqFrnZ3wREvQN59RnpGYyOrOn2RDS8q9LzBMppKYoC6QkF5zL8oFGr/N7nAFTbcugR8pJiirbVs0iI5TomALGtaNwgiBclqYdoAGtckiN1Ahk5FoKBv2/Zdft+zqL2On+eJEbFLxyiuONSwzSJmVpzIFYl5vpOuRsvAUcqfA2rAUOeshbU9FZ8dbKLwyTxaEnRpB7bNUssWBo+0QGFah7Pqty2i3KxxSNuT7HaVtrySWYmc54zbFFE21pQmIOFhVzMTIZ2HwbsxAiYPBODCaGRwTd+recw8yaquF8p1O2q/nXt93VvGxwpCORqLCTIIMPs4+HJUxuh10gup2EZ9Q1Hv1RY4vgulvuCABHY5DPoRXL+wPPONAJq3JZu/cCis4HHeMeaomulmzGhQloMndDxLh8lybzw6575QPcCWegRTrRm5afvwtkhTy9QTCgffsv8lvEHEW2waAXJuByVI9fTEnz4XIeESMwvnd3xFAu3/9XsfcvQTxi2yTAfrqXSPuHGO0WkBe49GYxz8Fz/jvW5VcbrEAywcEb9xYNDrfZYmCr2qXgbHblDzgQS//1HQUKsysTs3b0tKDMn4/0C+IW1AY8OD5bTfuicg5QuhFDruA4nqFqBaxQ9rWBAv7OPXUZGAOqUl0swtNr8AL6VE5ycEzH+a1bosBLlo=
-
+  - GIT_NAME: "'Couscous auto deploy'"
+  - GIT_EMAIL: d.negrier@thecodingmachine.com
+  - GH_REF: github.com/thecodingmachine/discovery
+  - secure: vs6xOm99WVSwJO5et+0dxk315gpYn/K0QQy040CVBbqnTiG+bdh/wtndl6tI+xSzJiRxcoauQVhkvuuK+0uPCwPygdJWnO1WmnOLHDwnfV8JNOAy0FYVUqNzRpywiMGPAwEUnPJXHfFt5djOA9U6Dn7a3IjxUgj14GRSS2ig+uuriYH2ybxEOUFBlWlH94C2kiV9kbPakeDjfkqmibJwI5urZfK1McYA7t+ajYV3xIOubVAmOiVkOQDZMnVEkZunKec52Rka2MLXA7tJ8PMWxkqEnYvyHIDCEA2YYDmzF5gTHepmWzJodxl0aRY2529/DucObN5rfc61xB3wNxUPMDJcBGXzrR4NMV7Hy/trYsPy/5JcMceaS0QHGBrxMlHMuPrVZfbeLMtK9nSZ7pE3lkZXi1UnU0IohO56dYCXYJmv26DKOoY8UQC14Kf2tkqNyMzykp/beJ6QH7sYFOBojBVnLl/VCz/U5j7YtkZ5aKrzy7C39T4kLnCzggKDWSHPHuQtWqTWOVgk8wzoqbhQw/Aexh+LkUCWjAN2NNgFkVDtkcGD4WD7YCP27qo+huP6NUdsBRSYlsMvvymRIrhw7jQs4qF1Eg6AxJKB0zOFHHXrU2ClbV09umfILxp2HN5laHG8Jhrqf9WBUFBEzhpP7izFPT4oVhggOxKNWwHoT88=
 script:
- - cd tests; ./run.sh
- - cd ..; vendor/bin/phpunit
- - ./vendor/bin/phpcs --standard=PSR2 ./src/ ./tests/unitTests --config-set ignore_warnings_on_exit 1
- - ./vendor/bin/humbug
-
+- cd tests; ./run.sh
+- cd ..; vendor/bin/phpunit
+- "./vendor/bin/phpcs --standard=PSR2 ./src/ ./tests/unitTests --config-set ignore_warnings_on_exit
+  1"
+- "./vendor/bin/humbug"
 after_script:
- - php vendor/bin/coveralls -v
- - ./vendor/bin/couscous travis-auto-deploy --php-version=7.1
+- php vendor/bin/coveralls -v
+- "./vendor/bin/couscous travis-auto-deploy --php-version=7.1"
