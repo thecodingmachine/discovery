@@ -101,14 +101,17 @@ h2{
     padding-right: 5px;
     font-size: 13px;
     color: white;
+    a {
+      display: block;
+      text-decoration: none;
+      color: #999999;
+    }
+    &.active {
+      background: rgba(255,255,255,0.2);
+    }
   }
 }
 
-.sidebar-nav li a {
-  display: block;
-  text-decoration: none;
-  color: #999999;
-}
 
 .sidebar-nav li:hover {
   background: rgba(255,255,255,0.2);
@@ -363,4 +366,14 @@ section {
     -ms-transform: scale(1);
     transform: scale(1);
   }
+}
+
+p.fork-and-edit {
+  background: url(../../img/Octocat.png) no-repeat;
+  font-style: italic;
+  height: 40px;
+  margin: 40px auto 0;
+  max-width: 580px;
+  padding-left: 40px;
+  padding-top: 5px;
 }
