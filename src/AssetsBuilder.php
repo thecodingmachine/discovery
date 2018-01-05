@@ -49,7 +49,16 @@ class AssetsBuilder
     {
         $unorderedPackagesList = $repository->getPackages();
 
-        $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
+        // For some weird reason, some packages can be in double in the repository.
+        // This has been observed when doing a "composer install" on an empty vendor directory.
+        // Let's ensure each package is represented only once.
+        $dedupPackages = [];
+        foreach($unorderedPackagesList as $package) {
+            $dedupPackages[$package->getName()] = $package;
+        }
+        $dedupPackages = array_values($dedupPackages);
+
+        $orderedPackageList = PackagesOrderer::reorderPackages($dedupPackages);
 
         $packages = array_filter($orderedPackageList, function (PackageInterface $package) {
             $packageInstallPath = $this->getInstallPath($package);
