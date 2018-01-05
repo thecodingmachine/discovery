@@ -48,14 +48,18 @@ class AssetsBuilder
     public function findAssetTypes(RepositoryInterface $repository) : array
     {
         $unorderedPackagesList = $repository->getPackages();
+        var_dump(count($unorderedPackagesList));
 
         $orderedPackageList = PackagesOrderer::reorderPackages($unorderedPackagesList);
+        var_dump(count($orderedPackageList));
 
         $packages = array_filter($orderedPackageList, function (PackageInterface $package) {
             $packageInstallPath = $this->getInstallPath($package);
 
             return file_exists($packageInstallPath.'/discovery.json');
         });
+        var_dump(count($packages));
+        var_dump($packages);
 
         return $this->buildAssetTypes($packages);
     }
