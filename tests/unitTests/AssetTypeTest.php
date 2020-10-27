@@ -1,12 +1,9 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery\Tests;
+namespace TheCodingMachine\Discovery;
 
 use PHPUnit\Framework\TestCase;
-use TheCodingMachine\Discovery\Asset;
-use TheCodingMachine\Discovery\AssetOperation;
-use TheCodingMachine\Discovery\AssetType;
 
 class AssetTypeTest extends TestCase
 {

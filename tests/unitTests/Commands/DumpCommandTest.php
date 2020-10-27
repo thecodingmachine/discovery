@@ -18,7 +18,7 @@ class DumpCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new DumpCommand(), $input);
 
-        $this->assertContains('Discovery files successfully dumped in the .discovery directory.', $result);
+        $this->assertStringContainsString('Discovery files successfully dumped in the .discovery directory.', $result);
     }
 
 }

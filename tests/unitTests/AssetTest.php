@@ -4,7 +4,6 @@ namespace TheCodingMachine\Discovery\Tests;
 
 
 use PHPUnit\Framework\TestCase;
-use TheCodingMachine\Discovery\Asset;
 
 class AssetTest extends TestCase
 {

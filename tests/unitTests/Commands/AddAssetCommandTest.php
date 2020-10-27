@@ -55,7 +55,7 @@ class AddAssetCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new AddAssetCommand(), $input);
 
-        $this->assertContains('The priority must be a numeric value.', $result);
+        $this->assertStringContainsString('The priority must be a numeric value.', $result);
 
     }
 

@@ -61,7 +61,7 @@ class RemoveAssetCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new RemoveAssetCommand(), $input);
 
-        $this->assertContains('There is no asset "not-exist" in asset type "not-exist".', $result);
+        $this->assertStringContainsString('There is no asset "not-exist" in asset type "not-exist".', $result);
     }
 
     public function testRemoveFromProject()

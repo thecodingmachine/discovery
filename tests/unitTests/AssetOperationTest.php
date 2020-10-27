@@ -3,8 +3,8 @@
 
 namespace TheCodingMachine\Discovery\Tests;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 use TheCodingMachine\Discovery\Asset;
 use TheCodingMachine\Discovery\AssetOperation;
 use TheCodingMachine\Discovery\Utils\JsonException;

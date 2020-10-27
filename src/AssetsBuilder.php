@@ -116,7 +116,7 @@ class AssetsBuilder
 
         $fileSystem = new Filesystem();
 
-        $packageDir = $fileSystem->makePathRelative($packageInstallPath, realpath($this->rootDir));
+        $packageDir = $fileSystem->makePathRelative(realpath($packageInstallPath), realpath($this->rootDir));
 
         $path = $packageInstallPath.'/discovery.json';
 

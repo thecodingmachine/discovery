@@ -1,10 +1,9 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery\Tests;
+namespace TheCodingMachine\Discovery;
 
 use PHPUnit\Framework\TestCase;
-use TheCodingMachine\Discovery\ImmutableAssetType;
 
 class ImmutableAssetTypeTest extends TestCase
 {
