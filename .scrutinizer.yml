@@ -2,14 +2,13 @@ checks:
   php: true
 
 build:
+  environment:
+    php: 7.4
   nodes:
     my-tests:
       dependencies:
         before:
           - cd tests && ./run.sh
-      environment:
-        php:
-          version: "7.4"
     analysis:
       tests:
         override:
