@@ -1,8 +1,10 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
+
+use TheCodingMachine\Discovery\Dumper;
 
 class DumperTest extends AbstractDiscoveryTest
 {

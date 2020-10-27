@@ -3,7 +3,9 @@
 namespace TheCodingMachine\Discovery;
 
 
-class AssetTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AssetTest extends TestCase
 {
     public function testToSimpleArray()
     {

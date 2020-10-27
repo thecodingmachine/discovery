@@ -1,19 +1,15 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery\Commands;
+namespace TheCodingMachine\Discovery\Tests\Commands;
 
 
-use Composer\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Tester\CommandTester;
-use TheCodingMachine\Discovery\AbstractDiscoveryTest;
+use TheCodingMachine\Discovery\Commands\ListAssetTypesCommand;
+use TheCodingMachine\Discovery\Tests\AbstractDiscoveryTest;
 
 class ListAssetTypesCommandTest extends AbstractDiscoveryTest
 {
@@ -31,9 +27,9 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
-        $this->assertContains('test-asset:', $result);
-        $this->assertContains('a1', $result);
-        $this->assertContains('a2', $result);
+        $this->assertStringContainsString('test-asset:', $result);
+        $this->assertStringContainsString('a1', $result);
+        $this->assertStringContainsString('a2', $result);
     }
 
     public function testWithAssetType()
@@ -42,9 +38,9 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
-        $this->assertContains('test-asset:', $result);
-        $this->assertContains('a1', $result);
-        $this->assertContains('a2', $result);
+        $this->assertStringContainsString('test-asset:', $result);
+        $this->assertStringContainsString('a1', $result);
+        $this->assertStringContainsString('a2', $result);
     }
 
     public function testJson()
@@ -63,6 +59,6 @@ class ListAssetTypesCommandTest extends AbstractDiscoveryTest
 
         $result = $this->callCommand(new ListAssetTypesCommand(), $input);
 
-        $this->assertContains('Could not find the "toto" asset type.', $result);
+        $this->assertStringContainsString('Could not find the "toto" asset type.', $result);
     }
 }

@@ -3,7 +3,9 @@
 
 namespace TheCodingMachine\Discovery;
 
-class ImmutableAssetTypeTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ImmutableAssetTypeTest extends TestCase
 {
     public function testFromArray()
     {

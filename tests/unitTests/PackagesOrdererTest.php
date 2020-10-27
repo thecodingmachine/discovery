@@ -1,13 +1,15 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
+use Composer\Semver\Constraint\Constraint;
 use Composer\Semver\VersionParser;
 use Composer\Package\Link;
-use Composer\TestCase;
+use PHPUnit\Framework\TestCase;
+use TheCodingMachine\Discovery\PackagesOrderer;
 
-class PackagesOrdererTest extends \PHPUnit_Framework_TestCase
+class PackagesOrdererTest extends TestCase
 {
     private static $parser;
 
@@ -36,10 +38,10 @@ class PackagesOrdererTest extends \PHPUnit_Framework_TestCase
         /* @var $packageB \Composer\Package\Package */
         /* @var $packageC \Composer\Package\Package */
         $packageB->setRequires([
-            new Link('package/b', 'package/za')
+            new Link('package/b', 'package/za', new Constraint('=', '*'))
         ]);
         $packageC->setRequires([
-            new Link('package/c', 'package/b')
+            new Link('package/c', 'package/b', new Constraint('=', '*'))
         ]);
 
         $result = PackagesOrderer::reorderPackages([$packageC, $packageB, $packageA]);

@@ -1,12 +1,13 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
 use Composer\Installer\InstallationManager;
 use Composer\IO\BufferIO;
 use Composer\Package\Package;
 use Composer\Repository\RepositoryInterface;
+use TheCodingMachine\Discovery\AssetsBuilder;
 
 class AssetsBuilderTest extends AbstractDiscoveryTest
 {

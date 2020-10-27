@@ -3,7 +3,9 @@
 
 namespace TheCodingMachine\Discovery;
 
-class AssetTypeTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AssetTypeTest extends TestCase
 {
     public function testAssetTypeName()
     {
