@@ -24,7 +24,7 @@ abstract class AbstractDiscoveryTest extends \PHPUnit_Framework_TestCase
 
         // Configure the stub.
         $installationManager->method('getInstallPath')
-            ->willReturn($installPath ?? 'tests/fixtures/package_a');
+            ->willReturn(realpath($installPath ?? 'tests/fixtures/package_a'));
 
         return $installationManager;
     }
