@@ -1,6 +1,6 @@
 <?php
 
-namespace TheCodingMachine\Discovery\Tests;
+namespace TheCodingMachine\Discovery;
 
 
 use PHPUnit\Framework\TestCase;
