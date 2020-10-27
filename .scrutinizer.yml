@@ -1,0 +1,22 @@
+checks:
+  php: true
+
+build:
+  nodes:
+    my-tests:
+      dependencies:
+        before:
+          - cd tests && ./run.sh
+      environment:
+        php:
+          version: "7.2"
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+
+filter:
+  paths:
+    - "src/*"
+    - "tests/*"
+
