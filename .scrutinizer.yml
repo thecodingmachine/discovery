@@ -9,7 +9,7 @@ build:
           - cd tests && ./run.sh
       environment:
         php:
-          version: "7.2"
+          version: "7.4"
     analysis:
       tests:
         override:
