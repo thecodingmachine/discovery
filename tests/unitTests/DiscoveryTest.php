@@ -39,7 +39,7 @@ class DiscoveryTest extends TestCase
 
         $this->assertSame('a1', $result->getAssets()[0]->getValue());
         $this->assertSame('package/a', $result->getAssets()[0]->getPackage());
-        $this->assertSame('vendor/package/a/', $result->getAssets()[0]->getPackageDir());
+        $this->assertSame('fixtures/package_a/', $result->getAssets()[0]->getPackageDir());
     }
 
     public function testEmptyAssetType()
