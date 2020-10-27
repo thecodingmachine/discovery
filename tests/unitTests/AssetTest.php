@@ -1,9 +1,12 @@
 <?php
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
 
-class AssetTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use TheCodingMachine\Discovery\Asset;
+
+class AssetTest extends TestCase
 {
     public function testToSimpleArray()
     {

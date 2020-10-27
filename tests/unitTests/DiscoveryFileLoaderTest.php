@@ -3,10 +3,11 @@
 
 namespace TheCodingMachine\Discovery;
 
+use PHPUnit\Framework\TestCase;
 use TheCodingMachine\Discovery\Utils\IOException;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
-class DiscoveryFileLoaderTest extends \PHPUnit_Framework_TestCase
+class DiscoveryFileLoaderTest extends TestCase
 {
     public function testLoad()
     {

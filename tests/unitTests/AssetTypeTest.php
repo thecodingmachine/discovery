@@ -1,9 +1,14 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
-class AssetTypeTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use TheCodingMachine\Discovery\Asset;
+use TheCodingMachine\Discovery\AssetOperation;
+use TheCodingMachine\Discovery\AssetType;
+
+class AssetTypeTest extends TestCase
 {
     public function testAssetTypeName()
     {

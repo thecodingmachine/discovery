@@ -4,7 +4,7 @@ php:
  - 7.1
  - 7.2
 before_script:
-- composer self-update --snapshot
+- composer self-update --2
 - composer clear-cache
 - composer update
 env:

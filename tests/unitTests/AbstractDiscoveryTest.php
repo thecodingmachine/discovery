@@ -1,7 +1,7 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
 
 use Composer\Command\BaseCommand;
@@ -12,11 +12,11 @@ use Composer\Package\Package;
 use Composer\Package\RootPackage;
 use Composer\Repository\RepositoryInterface;
 use Composer\Repository\RepositoryManager;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
-use TheCodingMachine\Discovery\Commands\ListAssetTypesCommand;
 
-abstract class AbstractDiscoveryTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractDiscoveryTest extends TestCase
 {
     protected function getInstallationManagerMock(string $installPath = null) : InstallationManager
     {

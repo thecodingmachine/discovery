@@ -1,12 +1,14 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery\Commands;
+namespace TheCodingMachine\Discovery\Tests\Commands;
 
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
+use TheCodingMachine\Discovery\Commands\CommandProvider;
 
-class CommandProviderTest extends \PHPUnit_Framework_TestCase
+class CommandProviderTest extends TestCase
 {
     public function testCommandProvider()
     {

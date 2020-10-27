@@ -1,11 +1,15 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use TheCodingMachine\Discovery\Asset;
+use TheCodingMachine\Discovery\AssetOperation;
 use TheCodingMachine\Discovery\Utils\JsonException;
 
-class AssetOperationTest extends \PHPUnit_Framework_TestCase
+class AssetOperationTest extends TestCase
 {
     public function testBuildFromString()
     {

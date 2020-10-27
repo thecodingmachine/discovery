@@ -1,9 +1,12 @@
 <?php
 
 
-namespace TheCodingMachine\Discovery;
+namespace TheCodingMachine\Discovery\Tests;
 
-class DiscoveryTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use TheCodingMachine\Discovery\Discovery;
+
+class DiscoveryTest extends TestCase
 {
     public function setUp()
     {
