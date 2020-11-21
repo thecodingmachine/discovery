@@ -29,7 +29,8 @@ class AssetOperationTest extends TestCase
             'priority' => 99,
             'metadata' => [
                 'foo' => 'bar'
-            ]
+            ],
+            'action' => 'add'
         ], 'bar/baz', 'vendor/bar/baz');
         $this->assertSame(AssetOperation::ADD, $assetOperation->getOperation());
         $this->assertSame('foo', $assetOperation->getAsset()->getValue());
