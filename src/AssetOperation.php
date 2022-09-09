@@ -94,12 +94,19 @@ class AssetOperation
         } else {
             $metadata = [];
         }
+        
+        if (isset($array['action'])) {
+            $action = $array['action'];
+            unset($array['action']);
+        } else {
+            $action = self::ADD;
+        }
 
         if (!empty($array)) {
             throw new JsonException(sprintf('Unexpected key(s) in discovery.json from package %s: "%s"', $package, implode(', ', array_keys($array))));
         }
 
-        return new self(self::ADD, new Asset($value, $package, $packageDir, $priority, $metadata));
+        return new self($action, new Asset($value, $package, $packageDir, $priority, $metadata));
     }
 
     /**
