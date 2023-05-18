@@ -75,7 +75,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
             return;
         }
         // Split the array in half
-        $halfway = count($array) / 2;
+        $halfway = (int)(count($array) / 2);
         $array1 = array_slice($array, 0, $halfway);
         $array2 = array_slice($array, $halfway);
         // Recurse to sort the two halves
@@ -141,7 +141,7 @@ class AssetType implements \JsonSerializable, AssetTypeInterface
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_map(function (Asset $asset) {
             return $asset->jsonSerialize();
