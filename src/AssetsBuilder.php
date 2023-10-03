@@ -49,16 +49,30 @@ class AssetsBuilder
     {
         $unorderedPackagesList = $repository->getPackages();
 
+        /**
+         * Package with type `metapackage` doesn't have installation path, which
+         * brings with it a problem finding discovery JSON files in all
+         * packages. This filter removes "metapackages" and leaves only real.
+         *
+         * Documentation: https://getcomposer.org/doc/04-schema.md#type
+         */
+        $realPackagesList = array_filter(
+            $unorderedPackagesList,
+            function (PackageInterface $package) {
+                return 'metapackage' !== $package->getType();
+            }
+        );
+
         // For some weird reason, some packages can be in double in the repository.
         // This has been observed when doing a "composer install" on an empty vendor directory.
         // Let's ensure each package is represented only once.
-        $dedupPackages = [];
-        foreach($unorderedPackagesList as $package) {
-            $dedupPackages[$package->getName()] = $package;
+        $uniquePackages = [];
+        foreach($realPackagesList as $package) {
+            $uniquePackages[$package->getName()] = $package;
         }
-        $dedupPackages = array_values($dedupPackages);
+        $uniquePackages = array_values($uniquePackages);
 
-        $orderedPackageList = PackagesOrderer::reorderPackages($dedupPackages);
+        $orderedPackageList = PackagesOrderer::reorderPackages($uniquePackages);
 
         $packages = array_filter($orderedPackageList, function (PackageInterface $package) {
             $packageInstallPath = $this->getInstallPath($package);
